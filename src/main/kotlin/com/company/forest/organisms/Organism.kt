@@ -1,10 +1,11 @@
 package com.company.forest.organisms
 
+import com.company.forest.IRemovable
 import com.company.forest.InProgress
 import javafx.scene.paint.Color
 import kotlin.math.roundToInt
 
-abstract class Organism {
+abstract class Organism: IRemovable {
     abstract val maxHealth: Int
     abstract val maxAge: Int
     abstract val color: Color
@@ -23,6 +24,10 @@ abstract class Organism {
     }
     @InProgress fun makeDead() {
 
+    }
+
+    override fun tryRemove() {
+        if (health <= 0) super.tryRemove()
     }
 
     init {
