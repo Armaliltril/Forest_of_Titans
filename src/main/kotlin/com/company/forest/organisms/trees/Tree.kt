@@ -7,10 +7,10 @@ abstract class Tree: Organism() {
     @InProgress abstract class PartOfTree() {
         abstract val capacity: Int
     }
-    @InProgress inner class Crown(): PartOfTree() {
+    @InProgress abstract inner class Crown(): PartOfTree() {
         override val capacity = 5
     }
-    @InProgress inner class Trunk(): PartOfTree() {
+    @InProgress abstract inner class Trunk(): PartOfTree() {
         override val capacity = 5
     }
     @InProgress inner class Roots(): PartOfTree() {
