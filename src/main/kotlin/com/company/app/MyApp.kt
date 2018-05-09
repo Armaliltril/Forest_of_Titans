@@ -1,5 +1,6 @@
 package com.company.app
 
+import com.company.view.ForestGrid
 import com.company.view.Intro
 import com.company.view.MainView
 import javafx.scene.image.Image
@@ -15,3 +16,5 @@ class MyApp: App(Intro::class, Styles::class) {
         stage.icons += Image(File("usages\\Icon.jpg").toURI().toString())
     }
 }
+
+class TestApp: App(ForestGrid::class)

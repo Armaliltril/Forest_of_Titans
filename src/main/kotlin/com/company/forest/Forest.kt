@@ -28,6 +28,6 @@ object Forest {
         currentDay = 180
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
-        places = arrayOf(arrayOf(Place())) //TODO() Need proper raandom initialization
+        places = Array(10, { Array(10, { Place() }) }) //TODO() Need proper random initialization
     }
 }
