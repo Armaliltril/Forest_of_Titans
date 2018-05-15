@@ -1,8 +1,5 @@
 package com.company.view
 
-import com.company.forest.Place
-import javafx.scene.Parent
-import javafx.scene.paint.Color
 import tornadofx.*
 
 
@@ -18,7 +15,7 @@ class ForestGrid(): View() {
                     add(rectangle {
                         height = 10.0
                         width = 10.0
-                        fill = places[i][j].animals.color
+                        fill = places[i][j].color
                     })
             }
         }

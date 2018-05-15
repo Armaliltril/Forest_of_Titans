@@ -1,14 +1,14 @@
 package com.company.forest.organisms
 
+import com.company.forest.IDrawable
 import com.company.forest.IRemovable
 import com.company.forest.InProgress
 import javafx.scene.paint.Color
 import kotlin.math.roundToInt
 
-abstract class Organism: IRemovable {
+abstract class Organism: IRemovable, IDrawable {
     abstract val maxHealth: Int
     abstract val maxAge: Int
-    abstract val color: Color
 
     var health: Int
     var age: Int

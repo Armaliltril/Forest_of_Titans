@@ -24,10 +24,14 @@ object Forest {
         currentDay %= 365
     }
 
+    private val size = 50
+
     init {
         currentDay = 180
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
-        places = Array(10, { Array(10, { Place() }) }) //TODO() Need proper random initialization
+        places = Array(size, { Array(size, { Place() }) })
     }
+
+
 }
