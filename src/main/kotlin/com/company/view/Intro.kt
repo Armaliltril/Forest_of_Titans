@@ -11,7 +11,5 @@ class Intro: View() {
                 replaceWith(find(ForestSetter::class))
             }
         }
-
-
     }
 }

@@ -10,17 +10,6 @@ import tornadofx.*
         title = "Forest of Titans"
         add(forestGrid)
     }
-
-    class ForestGrid: View() {
-        override val root = gridpane {
-            row {
-                label("Once it will be done")
-            }
-            row {
-                label("Yep, yep!")
-            }
-        }
-    }
 }
 
 

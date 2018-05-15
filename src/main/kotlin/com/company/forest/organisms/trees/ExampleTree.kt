@@ -7,6 +7,7 @@ class ExampleTree(): Tree() {
     override val color = Color.BROWN
     override val maxAge = 100000
     override val maxHealth = 1000
+    override val name = "Example Tree"
     @InProgress override fun eat() {
 
     }

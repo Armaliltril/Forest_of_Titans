@@ -9,6 +9,7 @@ import kotlin.math.roundToInt
 abstract class Organism: IRemovable, IDrawable {
     abstract val maxHealth: Int
     abstract val maxAge: Int
+    abstract val name: String
 
     var health: Int
     var age: Int

@@ -9,6 +9,7 @@ class ExampleCarnivorous: Animal(), ICarnivorous {
     override val maxHealth = 100
     override val maxAge = 100000
     override val color = Color.RED
+    override val name = "Example Carnivorous"
 
     @InProgress override fun eat() {
 

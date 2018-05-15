@@ -32,6 +32,4 @@ object Forest {
         currentSeason = Season.SUMMER
         places = Array(size, { Array(size, { Place() }) })
     }
-
-
 }
