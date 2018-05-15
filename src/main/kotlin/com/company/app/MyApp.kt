@@ -1,5 +1,6 @@
 package com.company.app
 
+import com.company.view.AnimalView
 import com.company.view.ForestGrid
 import com.company.view.Intro
 import com.company.view.MainView
@@ -17,4 +18,4 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(ForestGrid::class)
+class TestApp: App(AnimalView::class)

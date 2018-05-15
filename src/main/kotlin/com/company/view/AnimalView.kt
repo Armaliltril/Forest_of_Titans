@@ -1,12 +1,9 @@
 package com.company.view
 
-import com.company.forest.Forest
 import com.company.forest.InProgress
 import com.company.forest.organisms.animals.Animal
 import com.company.forest.organisms.animals.AnimalFactory
-import com.company.forest.organisms.animals.ExampleCarnivorous
 import com.company.view.signals.AnimalBox
-import com.company.view.signals.AnimalRequest
 import tornadofx.*
 
 class AnimalView : View() {
