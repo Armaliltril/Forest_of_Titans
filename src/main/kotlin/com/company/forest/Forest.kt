@@ -30,6 +30,9 @@ object Forest {
         currentDay = 180
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
-        places = Array(size, { Array(size, { Place() }) })
+        places = initPlaces()
+    }
+    @InProgress private fun initPlaces(): Array<Array<Place>> {
+        TODO()
     }
 }
