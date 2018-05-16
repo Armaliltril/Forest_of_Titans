@@ -18,4 +18,4 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(AnimalView::class)
+class TestApp: App(ForestGrid::class)
