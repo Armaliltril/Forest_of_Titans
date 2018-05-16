@@ -6,8 +6,11 @@ import tornadofx.*
 class TopMenu: View() {
     override val root = menubar {
         menu("Tooltips") {
-            @InProgress item("Show Tooltips", "Shortcut+T").action {
-                println("Pretending that there is tooltips")
+            item("Paint Tooltips").action {
+                openInternalWindow(PaintTooltips::class)
+            }
+            item("Tutorial").action {
+                openInternalWindow(Tutorial::class)
             }
         }
     }

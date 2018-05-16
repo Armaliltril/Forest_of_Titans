@@ -17,6 +17,7 @@ object Forest {
     var currentDay: Int
     val places: ArrayList<ArrayList<Place>>
 
+    //In runtime can be changed with real world time
     @InProgress fun changeSeason() {
 
     }
