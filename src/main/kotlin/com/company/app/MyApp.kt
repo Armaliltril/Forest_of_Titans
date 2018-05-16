@@ -15,4 +15,4 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(TopMenu::class)
+class TestApp: App(MainView::class)
