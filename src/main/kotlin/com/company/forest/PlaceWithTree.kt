@@ -5,7 +5,6 @@ import com.company.forest.organisms.trees.Tree
 
 
 @InProgress
-class PlaceWithTree: Place() {
-    @InProgress val tree = ExampleTree()
+class PlaceWithTree(val tree: Tree): Place() {
     override var color = tree.color
 }
