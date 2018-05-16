@@ -39,12 +39,15 @@ object Forest {
     @InProgress private fun initPlaces(): ArrayList<ArrayList<Place>> {
         val treeCenterCoordinates = Random.defineTreePlaces(size)
         val tempPlace = Place()
-        val places = makeArrayList(size, makeArrayList(size, tempPlace))
+        val places = arrayListOf<ArrayList<Place>>()
+        for (i in 0 until size)
+            places.add(makeArrayList(size, tempPlace))
 
         treeCenterCoordinates.forEach {
+            val tree = TreeFactory.getRandomTree()
             for (i in it.first-2..it.first+2)
-                for (j in it.second-2..it.second+2)
-                    places[i][j] = PlaceWithTree(TreeFactory.getRandomTree())
+                for (j in it.second - 2..it.second + 2)
+                    places[i][j] = PlaceWithTree(tree)
         }
 
         for (i in 0 until size)
@@ -53,5 +56,15 @@ object Forest {
                     places[i][j] = PlaceWithoutTree()
 
         return places
+    }
+
+    //FOR TESTING
+    fun printPlaces(places: ArrayList<ArrayList<Place>>) {
+        var row = "----------------------------------------------------\n"
+        places.forEach { it.forEach { if (it is PlaceWithoutTree) row += "p"
+                        else if (it is PlaceWithTree) row += "t"
+                        else row += "0"};
+            row += "\n" }
+        print(row + "\n")
     }
 }
