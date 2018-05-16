@@ -1,9 +1,6 @@
 package com.company.app
 
-import com.company.view.AnimalView
-import com.company.view.ForestGrid
-import com.company.view.Intro
-import com.company.view.MainView
+import com.company.view.*
 import javafx.scene.image.Image
 import javafx.stage.Stage
 import tornadofx.*
@@ -18,4 +15,4 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(ForestGrid::class)
+class TestApp: App(TopMenu::class)

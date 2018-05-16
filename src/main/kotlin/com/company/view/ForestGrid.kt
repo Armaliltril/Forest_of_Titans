@@ -7,7 +7,7 @@ import com.company.view.signals.TreeBox
 import javafx.scene.paint.Color
 import tornadofx.*
 
-
+//TODO FIX: Деревья съежают вправо из-за животных
 
 class ForestGrid(): View() {
     val forestModel = ForestModel()
@@ -16,28 +16,37 @@ class ForestGrid(): View() {
     override val root = gridpane {
         for (i in 0 until places.size) {
             row {
-                for (j in 0 until places.size)
-                    add(rectangle {
+                for (j in 0 until places.size) {
+                    val stackPane = stackpane()
+                    val rect = rectangle {
                         height = 10.0
                         width = 10.0
+                    }
 
-                        if (places[i][j] is PlaceWithoutTree) {
-                            val temp = places[i][j] as PlaceWithoutTree
-                            if (temp.animal != null)
-                                add(circle {
-                                    radius = 2.5
-                                    fill = temp.color
+                    if (places[i][j] is PlaceWithoutTree) {
+                        val temp = places[i][j] as PlaceWithoutTree
+                        rect.fill = Color.WHITE
+                        if (temp.animal != null) {
+                            stackPane.add(rect)
+                            stackPane.add(circle {
+                                radius = 2.5
+                                fill = temp.color
 
-                                    onDoubleClick { fire(AnimalBox(temp.animal!!)) }
-                                })
-                            fill = Color.LIGHTGRAY
+                                onDoubleClick { fire(AnimalBox(temp.animal!!)) }
+                            })
                         }
-                        else {
-                            val temp = places[i][j] as PlaceWithTree
+                        else stackPane.add(rect)
+                    }
+                    else {
+                        val temp = places[i][j] as PlaceWithTree
+                        rect.apply {
                             fill = temp.color
                             onDoubleClick { fire(TreeBox(temp.tree)) }
                         }
-                    })
+                        stackPane.add(rect)
+                    }
+                    add(stackPane)
+                }
             }
         }
     }
