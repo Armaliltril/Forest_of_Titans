@@ -3,6 +3,7 @@ package com.company.app
 import com.company.view.*
 import javafx.scene.image.Image
 import javafx.stage.Stage
+import org.junit.Test
 import tornadofx.*
 import java.io.File
 
