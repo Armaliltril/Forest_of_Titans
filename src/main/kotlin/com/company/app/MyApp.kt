@@ -23,11 +23,3 @@ class TestApp: App(ForestGrid::class){
         stage.isFullScreen = false
     }
 }
-
-val list = listOf(1, 2, 3, 4)
-
-class TestView: View() {
-    val list = listOf(1, 2, 3, 4)
-    override val root = datagrid(list) {
-    }
-}

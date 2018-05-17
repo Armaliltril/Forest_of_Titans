@@ -4,7 +4,6 @@ import com.company.forest.Forest
 import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree
 import com.company.forest.util.Observer
-import io.kotlintest.specs.FunSpec
 import io.kotlintest.shouldBe
 //
 //class ObserverTest: FunSpec({
