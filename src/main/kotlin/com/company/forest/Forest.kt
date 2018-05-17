@@ -3,6 +3,7 @@ package com.company.forest
 import com.company.experimental.Core
 import com.company.experimental.animal.example.StupidAnimal
 import com.company.experimental.tree.example.StupidTree
+import com.company.forest.util.Random
 import tornadofx.*
 import kotlin.concurrent.thread
 
@@ -15,19 +16,22 @@ object Forest {
     }
     
     var currentWeather: Weather
+    private var currentWeatherDays = 0
+
     var currentSeason: Season
+    private var passedDays = 0
+
     var currentDay: Int
     val places: ArrayList<ArrayList<Place>>
     var core: Core
 
-    //In runtime can be changed with real world time
-    @InProgress fun changeSeason() {
-
+    fun changeSeason() {
+        currentSeason = Random.getSeason(passedDays)
     }
-    @InProgress fun changeWeather() {
-
+    fun changeWeather() {
+        currentWeather = Random.getRandomWeather(currentWeatherDays)
     }
-    @InProgress fun changeDay() {
+    fun changeDay() {
         currentDay++
         currentDay %= 365
     }
@@ -43,7 +47,7 @@ object Forest {
                 .setLimitAnimalNumber(10000)
                 .build()
 
-        currentDay = 180
+        currentDay = 90
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
         places = core.places
@@ -52,15 +56,5 @@ object Forest {
             core.run()
         }
 
-    }
-
-    //FOR TESTING
-    fun printPlaces(places: ArrayList<ArrayList<Place>>) {
-        var row = "----------------------------------------------------\n"
-        places.forEach { it.forEach { if (it is PlaceWithoutTree) row += "p"
-                        else if (it is PlaceWithTree) row += "t"
-                        else row += "0"};
-            row += "\n" }
-        print(row + "\n")
     }
 }

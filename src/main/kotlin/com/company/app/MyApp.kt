@@ -16,7 +16,7 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(ForestGrid::class){
+class TestApp: App(TestView::class){
     override fun start(stage: Stage) {
         super.start(stage)
         stage.reloadViewsOnFocus()

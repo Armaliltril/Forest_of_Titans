@@ -1,5 +1,7 @@
 package com.company.forest.util
 
+import com.company.forest.Forest
+import com.company.forest.InProgress
 import java.util.Random
 
 object Random {
@@ -26,5 +28,10 @@ object Random {
 
         return treeCenterCoordinates
     }
-
+    @InProgress fun getRandomWeather(currentWeatherDays: Int): Forest.Weather {
+        return Forest.Weather.SUNNY
+    }
+    @InProgress fun getSeason(passedDays: Int): Forest.Season {
+        return Forest.Season.SUMMER
+    }
 }

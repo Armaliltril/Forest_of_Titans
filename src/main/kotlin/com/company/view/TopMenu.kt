@@ -2,25 +2,19 @@ package com.company.view
 
 import com.company.forest.Forest
 import com.company.forest.InProgress
+import com.company.view.signals.UpdateSignal
 import tornadofx.*
+import kotlin.concurrent.fixedRateTimer
+import kotlin.concurrent.timerTask
 
 class TopMenu : View() {
     lateinit var thread: Thread
     override val root = vbox {
         menubar {
             menu("Controls") {
-                @InProgress item("Start").action {
-//                    println("Pretending Start")
-////                    thread = Thread(Forest.core::run)
-////                    thread.start()
-//                    var lastTime = System.currentTimeMillis()
-//                    while (true) {
-//                        if (System.currentTimeMillis() - lastTime > 1000) {
-//                            val a = find(Updater::class).openModal()
-//                            a!!.close()
-//                            lastTime = System.currentTimeMillis()
-//                        }
-//                    }
+                item("Start").action {
+                    val task = timerTask { fire(UpdateSignal()) }
+                    fixedRateTimer("Timer", true, 0, 500, {task.run()})
                 }
 
                 @InProgress item("Stop").action {

@@ -9,6 +9,8 @@ class TreeData {
     lateinit var behavior: Tree
         private set
 
+    var name = ""
+
     var foodFrequency: Int = 10
         private set
 
