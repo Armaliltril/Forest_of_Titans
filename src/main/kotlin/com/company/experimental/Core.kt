@@ -17,7 +17,7 @@ class Core {
     private val animalBehaviorTypes: ArrayList<Pair<Animal, Int>> = ArrayList()
     private val treeBehaviorTypes: ArrayList<Pair<Tree, Int>> = ArrayList()
 
-    private var worldTime = 0
+    var worldTime = 0
 
     private var commonTreeRatio = 0.0
     private var startTreeNumber = 30
@@ -40,18 +40,7 @@ class Core {
 
     private constructor() {}
 
-    fun run() {
-        create()
-        var lastTime = System.currentTimeMillis()
-        while (currentAnimalNumber < limitAnimalNumber) {
-            if (System.currentTimeMillis() - lastTime > 200){
-                tick()
-                lastTime = System.currentTimeMillis()
-            }
-        }
-    }
-
-    private fun create() {
+    fun create() {
         val treeCenterCoordinates = com.company.forest.util.Random.defineTreePlaces(Forest.size)
         var counter = 0
 
@@ -91,6 +80,12 @@ class Core {
         }
     }
 
+    fun tick() {
+        worldTime += 1
+        treeTurn()
+        animalTurn()
+    }
+
     private fun createPlaces() {
         places = arrayListOf()
         val tempPlace = Place()
@@ -101,12 +96,6 @@ class Core {
                 places[i][j] = PlaceWithoutTree(null)
             }
         }
-    }
-
-    private fun tick() {
-        worldTime += 1
-        treeTurn()
-        animalTurn()
     }
 
     private fun treeTurn() {

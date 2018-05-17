@@ -5,6 +5,7 @@ import com.company.forest.InProgress
 import tornadofx.*
 
 @InProgress class MainView: View() {
+    private val forestUpdater = find(ForestUpdater::class)
     private val forestGrid = find(ForestGrid::class)
     private val topMenu = find(TopMenu::class)
     private val animalView = find(AnimalView::class)
@@ -13,6 +14,7 @@ import tornadofx.*
     override val root = vbox {
         title = "Forest of Titans"
         add(topMenu)
+        add(forestUpdater)
         hbox {
             add(forestGrid)
             add(treeView)

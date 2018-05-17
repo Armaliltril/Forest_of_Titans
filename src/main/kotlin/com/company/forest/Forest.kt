@@ -14,6 +14,8 @@ object Forest {
     enum class Season {
         SUMMER, AUTUMN, WINTER, SPRING
     }
+
+    val size = 50
     
     var currentWeather: Weather
     private var currentWeatherDays = 0
@@ -36,7 +38,14 @@ object Forest {
         currentDay %= 365
     }
 
-    public val size = 50
+    fun tick() {
+        core.tick()
+        if (core.worldTime % 50 == 49) {
+            changeDay()
+            changeWeather()
+            changeSeason()
+        }
+    }
 
     init {
         core = Core.Builder()
@@ -50,11 +59,9 @@ object Forest {
         currentDay = 90
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
+
+        core.create()
+
         places = core.places
-
-        runAsync {
-            core.run()
-        }
-
     }
 }
