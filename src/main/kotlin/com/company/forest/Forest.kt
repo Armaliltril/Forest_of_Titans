@@ -1,8 +1,8 @@
 package com.company.forest
 
-import com.company.forest.organisms.trees.TreeFactory
-import com.company.forest.util.Random
-import com.company.forest.util.makeArrayList
+import com.company.experimental.Core
+import com.company.experimental.animal.example.StupidAnimal
+import com.company.experimental.tree.example.StupidTree
 
 object Forest {
     enum class Weather {
@@ -16,6 +16,7 @@ object Forest {
     var currentSeason: Season
     var currentDay: Int
     val places: ArrayList<ArrayList<Place>>
+    var core: Core
 
     //In runtime can be changed with real world time
     @InProgress fun changeSeason() {
@@ -29,35 +30,21 @@ object Forest {
         currentDay %= 365
     }
 
-    private val size = 50
+    public val size = 50
 
     init {
+        core = Core.Builder()
+                .addAnimalBehavior(StupidAnimal())
+                .addTreeBehavior(StupidTree())
+                .setTreeNumber(10)
+                .setStartAnimalNumber(100)
+                .build()
+
         currentDay = 180
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
-        places = initPlaces()
-    }
-
-    @InProgress private fun initPlaces(): ArrayList<ArrayList<Place>> {
-        val treeCenterCoordinates = Random.defineTreePlaces(size)
-        val tempPlace = Place()
-        val places = arrayListOf<ArrayList<Place>>()
-        for (i in 0 until size)
-            places.add(makeArrayList(size, tempPlace))
-
-        treeCenterCoordinates.forEach {
-            val tree = TreeFactory.getRandomTree()
-            for (i in it.first-2..it.first+2)
-                for (j in it.second - 2..it.second + 2)
-                    places[i][j] = PlaceWithTree(tree)
-        }
-
-        for (i in 0 until size)
-            for (j in 0 until size)
-                if (places[i][j] !is PlaceWithTree)
-                    places[i][j] = PlaceWithoutTree()
-
-        return places
+        places = core.places
+        core.run()
     }
 
     //FOR TESTING

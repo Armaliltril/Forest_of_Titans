@@ -1,18 +1,24 @@
-package com.company.experimental
+package com.company.experimental.animal
 
+import javafx.scene.paint.Color
 import com.company.forest.Place
 
-interface Animal: AnimalBehavior{
+interface Animal: AnimalBehavior {
     fun associateWith(herald: AnimalData.AnimalHerald)
 
     fun tick()
 
     fun getType() : AnimalType
-    fun createData() = getType().createData(this)
+
+    fun getColor() : Color
+
+    fun createData(x: Int, y: Int) = getType().createData(this, x, y)
 }
 
 interface AnimalBehavior{
-    fun move(place: Place)
+    fun goAhead()
+
+    fun rotateRightHand(right: Boolean)
 
     fun eat(place: Place)
 

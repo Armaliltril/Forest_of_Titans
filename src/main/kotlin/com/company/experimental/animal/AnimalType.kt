@@ -1,4 +1,4 @@
-package com.company.experimental
+package com.company.experimental.animal
 
 import java.util.*
 
@@ -31,6 +31,7 @@ enum class AnimalType {
     WALKING_MEAT {
         override fun createData(animal: Animal, xCoord: Int, yCoord: Int): AnimalData =
                 AnimalData.Builder()
+                        .setBehavior(animal)
                         .setName(createName(animal))
                         .setMaxAge(1000)
                         .setMaxHealth(10)

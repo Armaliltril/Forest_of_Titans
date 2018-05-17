@@ -1,6 +1,7 @@
 package com.company.view.signals
 
-import com.company.forest.organisms.animals.Animal
+import com.company.experimental.animal.Animal
+import com.company.experimental.animal.AnimalData
 import tornadofx.*
 
-class AnimalBox(val animal: Animal): FXEvent(EventBus.RunOn.BackgroundThread)
+class AnimalBox(val animal: AnimalData): FXEvent(EventBus.RunOn.BackgroundThread)

@@ -1,8 +1,7 @@
 package com.company.view
 
+import com.company.experimental.tree.TreeData
 import com.company.forest.InProgress
-import com.company.forest.organisms.trees.Tree
-import com.company.forest.organisms.trees.TreeFactory
 import com.company.view.signals.TreeBox
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.text.FontWeight
@@ -30,10 +29,10 @@ class TreeView: View() {
         //TODO Parts of Tree
     }
 
-    private fun updateProperties(tree: Tree) {
-        name.value = tree.name
-        health.value = "Health: " + tree.health.toString() + "/" + tree.maxHealth.toString()
-        age.value = "Age: " + tree.age.toString() + "/" + tree.maxAge.toString()
-        hunger.value = "Hunger: " + tree.hunger.toString()
+    private fun updateProperties(tree: TreeData) {
+//        name.value = tree.name
+//        health.value = "Health: " + tree.health.toString() + "/" + tree.maxHealth.toString()
+//        age.value = "Age: " + tree.age.toString() + "/" + tree.maxAge.toString()
+//        hunger.value = "Hunger: " + tree.hunger.toString()
     }
 }

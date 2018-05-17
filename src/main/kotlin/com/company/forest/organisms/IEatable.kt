@@ -7,3 +7,7 @@ interface IEatable {
         return listOf()
     }
 }
+
+class Organism {
+
+}

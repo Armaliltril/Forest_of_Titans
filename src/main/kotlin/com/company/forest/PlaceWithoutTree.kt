@@ -1,24 +1,21 @@
 package com.company.forest
 
-import com.company.forest.organisms.animals.Animal
-import com.company.forest.organisms.animals.AnimalFactory
+import com.company.experimental.animal.Animal
+import com.company.experimental.animal.AnimalData
+import com.company.experimental.animal.example.StupidAnimal
 import com.company.forest.util.Random
 import javafx.scene.paint.Color
 
-class PlaceWithoutTree: Place() {
-    var animal: Animal? = null
+class PlaceWithoutTree(var animal: AnimalData?): Place() {
 
     fun updateColor() {
         when(animal) {
             null -> color = Color.LIGHTGRAY
-            else -> color = animal!!.color
+            else -> color = animal!!.behavior.getColor()
         }
     }
 
     init {
-        if (Random.happenWithChance(3)) {
-            animal = AnimalFactory.getRandomAnimal()
-        }
         updateColor()
     }
 }

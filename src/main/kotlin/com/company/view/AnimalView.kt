@@ -1,15 +1,12 @@
 package com.company.view
 
+import com.company.experimental.animal.Animal
+import com.company.experimental.animal.AnimalData
 import com.company.forest.InProgress
-import com.company.forest.organisms.animals.Animal
-import com.company.forest.organisms.animals.AnimalFactory
 import com.company.view.signals.AnimalBox
-import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
-import javafx.scene.paint.Color
 import javafx.scene.text.FontWeight
 import tornadofx.*
-import kotlin.math.max
 
 class AnimalView : View() {
     var name =  SimpleStringProperty()
@@ -36,9 +33,9 @@ class AnimalView : View() {
         //TODO MindMap
     }
 
-    private fun updateProperties(animal: Animal) {
+    private fun updateProperties(animal: AnimalData) {
         name.value = animal.name
-        stamina.value = "Stamina: " + animal.stamina.toString()
+//        stamina.value = "Stamina: " + animal.stamina.toString()
         health.value = "Health: " + animal.health.toString() + "/" + animal.maxHealth.toString()
         age.value = "Age: " + animal.age.toString() + "/" + animal.maxAge.toString()
         hunger.value = "Hunger: " + animal.hunger.toString()

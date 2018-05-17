@@ -1,10 +1,13 @@
-package com.company.experimental
+package com.company.experimental.tree
 
-import com.company.forest.Place
+import com.company.experimental.animal.Animal
+import com.company.experimental.animal.AnimalData
 import java.lang.Integer.min
 import java.util.*
 
 class TreeData {
+    lateinit var behavior: Tree
+        private set
 
     var foodFrequency: Int = 10
         private set
@@ -55,6 +58,11 @@ class TreeData {
 
         fun setXPosition(param: Int): Builder {
             treeData.xPosition = param
+            return this
+        }
+
+        fun setBehavior(tree: Tree): Builder {
+            treeData.behavior = tree
             return this
         }
 

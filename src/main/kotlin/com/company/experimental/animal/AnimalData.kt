@@ -1,8 +1,11 @@
-package com.company.experimental
+package com.company.experimental.animal
 
 import com.company.forest.Place
 
 class AnimalData {
+    lateinit var behavior: Animal
+        private set
+
     var name: String = ""
 
     var maxHealth: Int = 0
@@ -60,14 +63,19 @@ class AnimalData {
             return this
         }
 
-        fun build() : AnimalData{
+        fun setBehavior(animal: Animal): Builder {
+            animalData.behavior = animal
+            return this
+        }
+
+        fun build() : AnimalData {
             animalData.health = animalData.maxHealth
             return animalData
         }
     }
 
 
-    class AnimalHerald : AnimalBehavior{
+    class AnimalHerald : AnimalBehavior {
         var turnNumber: Int = 0
 
         lateinit var behavior: Animal
@@ -88,13 +96,18 @@ class AnimalData {
             }
         }
 
-        fun getInfo() : AnimalData{
+        fun getInfo() : AnimalData {
             return data
         }
 
-        override fun move(place: Place) {
-            TODO("implements method with coordinates")
+        override fun rotateRightHand(right: Boolean) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
+
+        override fun goAhead() {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
 
         override fun eat(place: Place) {
             TODO("implements method with coordinates")
@@ -113,7 +126,10 @@ class AnimalData {
         }
 
         override fun askExtraTurn() {
-
+            return
+//            if (turnNumber == 1 && data.isAlive){
+//                needsAdditionalTurn = true
+//            }
         }
     }
 }

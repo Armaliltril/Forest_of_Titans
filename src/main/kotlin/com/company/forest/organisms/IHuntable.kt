@@ -1,10 +1,10 @@
 package com.company.forest.organisms
 
+import com.company.experimental.animal.AnimalData
 import com.company.forest.InProgress
-import com.company.forest.organisms.animals.Animal
 
 interface IHuntable {
-    @InProgress fun hunt(animal: Animal) {
+    @InProgress fun hunt(animal: AnimalData) {
 
     }
 }
