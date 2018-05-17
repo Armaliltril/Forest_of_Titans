@@ -16,4 +16,4 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(Statistics::class)
+class TestApp: App(TopMenu::class)
