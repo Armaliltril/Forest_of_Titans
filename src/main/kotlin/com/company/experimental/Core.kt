@@ -58,11 +58,11 @@ class Core {
         for (pair in treeBehaviorTypes) {
             pair.first.associateWith(treeHerald)
             // Start number of animals for this behavior
-            for (i in 0 until (pair.second / commonTreeRatio * startTreeNumber).toInt()) {
+            for (c in 0 until (pair.second / commonTreeRatio * startTreeNumber).toInt()) {
                 val it = treeCenterCoordinates[counter++]
                 val treeData = pair.first.createData(it.first, it.second)
-                for (i in it.first - 2..it.first + 2) {
-                    for (j in it.second - 2..it.second + 2) {
+                for (i in it.second - 2..it.second + 2) {
+                    for (j in it.first - 2..it.first + 2) {
                         places[i][j] = PlaceWithTree(treeData)
                     }
                 }
@@ -83,7 +83,7 @@ class Core {
                     j = rnd.nextInt(Forest.size)
                 } while (places[i][j] is PlaceWithTree)
 
-                val animalData = pair.first.createData(i, j)
+                val animalData = pair.first.createData(j, i)
                 places[i][j] = PlaceWithoutTree(animalData)
                 animals.add(Pair(pair.first, animalData))
                 currentAnimalNumber += 1

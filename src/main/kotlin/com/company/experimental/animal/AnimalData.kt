@@ -31,6 +31,8 @@ class AnimalData {
         private set
     var hunger: Int = 0
         private set
+    var foodHealing: Int = 0
+        private set
 
     var isAlive = true
         private set
@@ -76,6 +78,11 @@ class AnimalData {
             return this
         }
 
+        fun setFoodHealing(param: Int): Builder {
+            animalData.foodHealing = param
+            return this
+        }
+
         fun setBehavior(animal: Animal): Builder {
             animalData.behavior = animal
             return this
@@ -87,10 +94,10 @@ class AnimalData {
         }
     }
 
-
     class AnimalHerald : AnimalBehavior {
 
         var turnNumber: Int = 0
+        var actionScore: Int = 0
 
         lateinit var behavior: Animal
         lateinit var data: AnimalData
@@ -101,6 +108,7 @@ class AnimalData {
             this.behavior = behavior
             this.data = data
             this.needsAdditionalTurn = false
+            this.actionScore = 3
 
         }
 
@@ -115,7 +123,12 @@ class AnimalData {
             return data
         }
 
-        override fun goAhead() : Boolean{
+        override fun goAhead(): Boolean {
+            if (actionScore == 0) {
+                return false
+            }
+            actionScore -= 2
+
             val direction = data.direction.value
 
             val curY = data.yPosition + direction.first
@@ -145,25 +158,50 @@ class AnimalData {
         }
 
 
-        override fun eat(place: Place) : Boolean{
-            return true
-            TODO("implements method with coordinates")
+        override fun eat(place: Place): Boolean {
+            if (actionScore == 0){
+                return false
+            }
+            actionScore -= 2
+
+            if (place is PlaceWithoutTree && place.animal != null) {
+                if (place.animal!!.isAlive){
+                    return false
+                }
+                data.hunger -= place.animal!!.health / 10
+                return true
+            }
+            return false
         }
 
+
         override fun fight(place: Place): Boolean {
+            if (actionScore == 0) {
+                return false
+            }
+            actionScore -= 2
             return true
-            TODO("implements method with coordinates")
         }
 
         override fun regenerate(): Boolean {
-            return true
+            if (actionScore == 0) {
+                return false
+            }
+            actionScore -= 2
+            if (data.hunger < 0) {
+                data.health += data.foodHealing
+                return true
+            }
+            return false
         }
 
         override fun reproduce(place: Place): Boolean {
+            if (actionScore == 0) {
+                return false
+            }
+            actionScore -= 2
             return true
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
-
 
         private fun checkBounds(x: Int, y: Int, borderX: Int, borderY: Int): Boolean {
             return -1 < y && y < borderY && -1 < x && x < borderX
@@ -193,7 +231,8 @@ class AnimalData {
 
         fun previousDirection(direction: Directions): Directions {
             val index = Directions.values().indexOf(direction)
-            return Directions.values()[(index - 1) % 4]
+            val newIndex = (index - 1) % 4
+            return Directions.values()[if (newIndex != -1) newIndex else 3]
         }
 
         override fun askExtraTurn(): Boolean {

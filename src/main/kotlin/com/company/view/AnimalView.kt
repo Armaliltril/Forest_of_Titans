@@ -29,8 +29,6 @@ class AnimalView : View() {
         text().bind(health)
         text().bind(age)
         text().bind(hunger)
-
-        //TODO MindMap
     }
 
     private fun updateProperties(animal: AnimalData) {

@@ -3,6 +3,7 @@ package com.company.forest
 import com.company.experimental.Core
 import com.company.experimental.animal.example.StupidAnimal
 import com.company.experimental.tree.example.StupidTree
+import tornadofx.*
 import kotlin.concurrent.thread
 
 object Forest {
@@ -46,6 +47,10 @@ object Forest {
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
         places = core.places
+
+        runAsync {
+            core.run()
+        }
 
     }
 
