@@ -4,13 +4,28 @@ import com.company.forest.InProgress
 import tornadofx.*
 
 class TopMenu: View() {
-    override val root = menubar {
-        menu("Tooltips") {
-            item("Paint Tooltips").action {
-                openInternalWindow(PaintTooltips::class)
+    override val root = vbox {
+        menubar {
+            menu("Controls") {
+                @InProgress item("Start").action {
+                    println("Pretending Start")
+                }
+                @InProgress item("Stop").action {
+                    println("Pretending Stop")
+                }
             }
-            item("Tutorial").action {
-                openInternalWindow(Tutorial::class)
+            menu("Tooltips") {
+                item("Paint Tooltips").action {
+                    find(PaintTooltips::class).openModal()
+                }
+                item("Tutorial").action {
+                    find(Tutorial::class).openModal()
+                }
+            }
+            menu("Statistics") {
+                item("Open statistics").action {
+                    find(Statistics::class).openModal()
+                }
             }
         }
     }

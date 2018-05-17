@@ -17,6 +17,8 @@ class TreeView: View() {
     @InProgress override val root = vbox {
         subscribe<TreeBox> { updateProperties(it.tree) }
 
+        setMinSize(100.0, 150.0)
+
         text {
             bind(name)
             style{fontWeight = FontWeight.BOLD}
