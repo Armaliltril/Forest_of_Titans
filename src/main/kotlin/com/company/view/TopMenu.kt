@@ -8,15 +8,15 @@ class TopMenu: View() {
         menubar {
             menu("Tooltips") {
                 item("Paint Tooltips").action {
-                    openInternalWindow(PaintTooltips::class)
+                    find(PaintTooltips::class).openModal()
                 }
                 item("Tutorial").action {
-                    openInternalWindow(Tutorial::class)
+                    find(Tutorial::class).openModal()
                 }
             }
             menu("Statistics") {
                 item("Open statistics").action {
-                    openInternalWindow(Statistics::class)
+                    find(Statistics::class).openModal()
                 }
             }
         }
