@@ -3,7 +3,7 @@ package com.company.experimental
 import com.company.forest.Place
 
 interface Animal: AnimalBehavior{
-    fun associateWith(herald: AnimalData.Herald)
+    fun associateWith(herald: AnimalData.AnimalHerald)
 
     fun tick()
 

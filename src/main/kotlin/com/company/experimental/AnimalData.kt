@@ -67,7 +67,7 @@ class AnimalData {
     }
 
 
-    class Herald: AnimalBehavior{
+    class AnimalHerald : AnimalBehavior{
         var turnNumber: Int = 0
 
         lateinit var behavior: Animal
@@ -83,6 +83,7 @@ class AnimalData {
 
         fun tick(){
             if (data.isAlive){
+                data.age += 1
                 behavior.tick()
             }
         }
@@ -112,7 +113,7 @@ class AnimalData {
         }
 
         override fun askExtraTurn() {
-            
+
         }
     }
 }
