@@ -1,5 +1,6 @@
 package com.company.experimental.animal
 
+import com.company.experimental.Rotations
 import javafx.scene.paint.Color
 import com.company.forest.Place
 
@@ -16,17 +17,17 @@ interface Animal: AnimalBehavior {
 }
 
 interface AnimalBehavior{
-    fun goAhead()
+    fun goAhead() : Boolean
 
-    fun rotateRightHand(right: Boolean)
+    fun turnAround(rotation: Rotations): Boolean
 
-    fun eat(place: Place)
+    fun eat(place: Place) : Boolean
 
-    fun fight(place: Place)
+    fun fight(place: Place) : Boolean
 
-    fun regenerate()
+    fun regenerate() : Boolean
 
-    fun reproduce(place: Place)
+    fun reproduce(place: Place) : Boolean
 
-    fun askExtraTurn()
+    fun askExtraTurn() : Boolean
 }

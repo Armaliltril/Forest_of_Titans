@@ -16,4 +16,18 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(MainView::class)
+class TestApp: App(ForestGrid::class){
+    override fun start(stage: Stage) {
+        super.start(stage)
+        stage.reloadViewsOnFocus()
+        stage.isFullScreen = false
+    }
+}
+
+val list = listOf(1, 2, 3, 4)
+
+class TestView: View() {
+    val list = listOf(1, 2, 3, 4)
+    override val root = datagrid(list) {
+    }
+}

@@ -9,6 +9,7 @@ import javafx.scene.paint.Color
 
 class StupidAnimal: BaseAnimalBehavior() {
     override fun tick() {
+        goAhead()
     }
 
     override fun getColor(): Color {

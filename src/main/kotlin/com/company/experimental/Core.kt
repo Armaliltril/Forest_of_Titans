@@ -36,13 +36,18 @@ class Core {
     // For compatibility -_-
 
     lateinit var places: ArrayList<ArrayList<Place>>
+        private set
 
     private constructor() {}
 
     fun run() {
         create()
+        var lastTime = System.currentTimeMillis()
         while (currentAnimalNumber < limitAnimalNumber) {
-            tick()
+            if (System.currentTimeMillis() - lastTime > 200){
+                tick()
+                lastTime = System.currentTimeMillis()
+            }
         }
     }
 

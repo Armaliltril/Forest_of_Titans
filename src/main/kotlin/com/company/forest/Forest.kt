@@ -3,6 +3,7 @@ package com.company.forest
 import com.company.experimental.Core
 import com.company.experimental.animal.example.StupidAnimal
 import com.company.experimental.tree.example.StupidTree
+import kotlin.concurrent.thread
 
 object Forest {
     enum class Weather {
@@ -37,14 +38,15 @@ object Forest {
                 .addAnimalBehavior(StupidAnimal())
                 .addTreeBehavior(StupidTree())
                 .setTreeNumber(10)
-                .setStartAnimalNumber(100)
+                .setStartAnimalNumber(10)
+                .setLimitAnimalNumber(10000)
                 .build()
 
         currentDay = 180
         currentWeather = Weather.SUNNY
         currentSeason = Season.SUMMER
         places = core.places
-        core.run()
+
     }
 
     //FOR TESTING

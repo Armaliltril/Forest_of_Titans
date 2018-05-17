@@ -1,6 +1,11 @@
 package com.company.experimental.animal
 
+import com.company.experimental.Directions
+import com.company.experimental.Rotations
+import com.company.forest.Forest
 import com.company.forest.Place
+import com.company.forest.PlaceWithTree
+import com.company.forest.PlaceWithoutTree
 
 class AnimalData {
     lateinit var behavior: Animal
@@ -28,6 +33,14 @@ class AnimalData {
         private set
 
     var isAlive = true
+        private set
+//
+//    var curEnergy = 10
+//        private set
+//    var maxEnergy = 10
+//        private set
+
+    var direction = Directions.UP
         private set
 
     class Builder {
@@ -68,7 +81,7 @@ class AnimalData {
             return this
         }
 
-        fun build() : AnimalData {
+        fun build(): AnimalData {
             animalData.health = animalData.maxHealth
             return animalData
         }
@@ -76,6 +89,7 @@ class AnimalData {
 
 
     class AnimalHerald : AnimalBehavior {
+
         var turnNumber: Int = 0
 
         lateinit var behavior: Animal
@@ -87,49 +101,103 @@ class AnimalData {
             this.behavior = behavior
             this.data = data
             this.needsAdditionalTurn = false
+
         }
 
-        fun tick(){
-            if (data.isAlive){
+        fun tick() {
+            if (data.isAlive) {
                 data.age += 1
                 behavior.tick()
             }
         }
 
-        fun getInfo() : AnimalData {
+        fun getInfo(): AnimalData {
             return data
         }
 
-        override fun rotateRightHand(right: Boolean) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        override fun goAhead() : Boolean{
+            val direction = data.direction.value
+
+            val curY = data.yPosition + direction.first
+            val curX = data.xPosition + direction.second
+
+            if (checkBounds(curX, curY) && checkPlace(curX, curY)) {
+                val place = (Forest.places[data.yPosition][data.xPosition] as PlaceWithoutTree)
+                place.animal = null
+//                place.updateColor()
+
+                data.xPosition = curX
+                data.yPosition = curY
+                val newPlace = (Forest.places[data.yPosition][data.xPosition] as PlaceWithoutTree)
+                newPlace.animal = data
+//                newPlace.updateColor()
+
+                //updateMaps(data.x, data.y, curX, curY)
+                return true
+//                if (checkBounds(data.visionX + direction.first, data.visionY + direction.second, 30, 30)) {
+//                    data.visionX += direction.first
+//                    data.visionY += direction.second
+//                } else {
+//
+//                }
+            }
+            return false
         }
 
-        override fun goAhead() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
 
-
-        override fun eat(place: Place) {
+        override fun eat(place: Place) : Boolean{
+            return true
             TODO("implements method with coordinates")
         }
 
-        override fun fight(place: Place) {
+        override fun fight(place: Place): Boolean {
+            return true
             TODO("implements method with coordinates")
         }
 
-        override fun regenerate() {
-
+        override fun regenerate(): Boolean {
+            return true
         }
 
-        override fun reproduce(place: Place) {
+        override fun reproduce(place: Place): Boolean {
+            return true
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        override fun askExtraTurn() {
-            return
-//            if (turnNumber == 1 && data.isAlive){
-//                needsAdditionalTurn = true
-//            }
+
+        private fun checkBounds(x: Int, y: Int, borderX: Int, borderY: Int): Boolean {
+            return -1 < y && y < borderY && -1 < x && x < borderX
+        }
+
+        private fun checkBounds(x: Int, y: Int): Boolean {
+            return checkBounds(x, y, Forest.size, Forest.size)
+        }
+
+        private fun checkPlace(x: Int, y: Int): Boolean {
+            return Forest.places[y][x] !is PlaceWithTree && (Forest.places[y][x] as PlaceWithoutTree).animal == null
+        }
+
+        override fun turnAround(rotation: Rotations): Boolean {
+            if (rotation == Rotations.RIGHT) {
+                data.direction = nextDirection(data.direction)
+            } else {
+                data.direction = previousDirection(data.direction)
+            }
+            return true
+        }
+
+        fun nextDirection(direction: Directions): Directions {
+            val index = Directions.values().indexOf(direction)
+            return Directions.values()[(index + 1) % 4]
+        }
+
+        fun previousDirection(direction: Directions): Directions {
+            val index = Directions.values().indexOf(direction)
+            return Directions.values()[(index - 1) % 4]
+        }
+
+        override fun askExtraTurn(): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
     }
 }
