@@ -7,9 +7,11 @@ import javafx.scene.paint.Color
 import kotlin.math.roundToInt
 
 abstract class Organism: IRemovable, IDrawable {
+    abstract val name: String
+
     abstract val maxHealth: Int
     abstract val maxAge: Int
-    abstract val name: String
+    abstract val maxHunger: Int
 
     var health: Int
     var age: Int
@@ -23,6 +25,7 @@ abstract class Organism: IRemovable, IDrawable {
     @InProgress fun regenerate() {
         health = ((health * 0.1) % maxHealth).roundToInt()
     }
+
     @InProgress fun makeDead() {
 
     }

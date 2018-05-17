@@ -37,6 +37,7 @@ object Forest {
         currentSeason = Season.SUMMER
         places = initPlaces()
     }
+
     @InProgress private fun initPlaces(): ArrayList<ArrayList<Place>> {
         val treeCenterCoordinates = Random.defineTreePlaces(size)
         val tempPlace = Place()
