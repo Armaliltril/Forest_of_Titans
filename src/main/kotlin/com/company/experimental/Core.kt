@@ -40,8 +40,9 @@ class Core {
 
     private constructor() {}
 
+    var wasCreated = false
+
     fun run() {
-        create()
         var lastTime = System.currentTimeMillis()
         while (currentAnimalNumber < limitAnimalNumber) {
             if (System.currentTimeMillis() - lastTime > 200){
@@ -103,7 +104,11 @@ class Core {
         }
     }
 
-    private fun tick() {
+    public fun tick() {
+        if (!wasCreated) {
+            create()
+            wasCreated = true
+        }
         worldTime += 1
         treeTurn()
         animalTurn()

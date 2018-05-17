@@ -1,5 +1,6 @@
 package com.company.view
 
+import com.company.forest.Forest
 import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree
 import com.company.view.signals.AnimalBox
@@ -16,12 +17,14 @@ class ForestGrid(): View() {
     override val root = gridpane {
         for (i in 0 until places.size) {
             row {
+                Forest.colors.add(ArrayList())
                 for (j in 0 until places.size) {
                     val stackPane = stackpane()
                     val rect = rectangle {
                         height = 10.0
                         width = 10.0
                     }
+                    Forest.colors[i].add(rect)
 
                     if (places[i][j] is PlaceWithoutTree) {
                         val temp = places[i][j] as PlaceWithoutTree

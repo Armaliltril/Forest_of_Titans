@@ -6,10 +6,13 @@ import com.company.forest.Forest
 import com.company.forest.Place
 import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree
+import java.awt.Color
 
 class AnimalData {
     lateinit var behavior: Animal
         private set
+
+    var target: Pair<Place, Char>? = null
 
     var name: String = ""
 
@@ -95,7 +98,6 @@ class AnimalData {
     }
 
     class AnimalHerald : AnimalBehavior {
-
         var turnNumber: Int = 0
         var actionScore: Int = 0
 
@@ -123,6 +125,71 @@ class AnimalData {
             return data
         }
 
+        override fun seeEnemies(): List<Place> {
+
+            val results = mutableListOf<Place>()
+            when (data.direction) {
+                Directions.UP -> {
+                    for (i in data.xPosition - 5 until data.xPosition + 5) {
+                        for (j in data.yPosition until data.yPosition + 5) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+
+                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                    results.add(place)
+                                }
+                            }
+                        }
+                    }
+                };
+                Directions.DOWN -> {
+                    for (i in data.xPosition - 5 until data.xPosition + 5) {
+                        for (j in data.yPosition + 5 downTo data.yPosition) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                    results.add(place)
+                                }
+                            }
+                        }
+                    }
+                }
+                Directions.LEFT -> {
+                    for (i in data.xPosition - 5 until  data.xPosition) {
+                        for (j in data.yPosition - 5 until data.yPosition + 5) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                    results.add(place)
+                                }
+                            }
+                        }
+                    }
+                }
+                Directions.RIGHT -> {
+                    for (i in data.xPosition until data.xPosition + 5) {
+                        for (j in data.yPosition - 5 until data.yPosition + 5) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                    results.add(place)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return results
+        }
+
+        override fun seeFood(): List<Place> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun seeFriends(): List<Place> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun goAhead(): Boolean {
             if (actionScore == 0) {
                 return false
@@ -137,12 +204,14 @@ class AnimalData {
             if (checkBounds(curX, curY) && checkPlace(curX, curY)) {
                 val place = (Forest.places[data.yPosition][data.xPosition] as PlaceWithoutTree)
                 place.animal = null
+//                Forest.colors[data.yPosition][data.xPosition].fill = javafx.scene.paint.Color.WHITE
 //                place.updateColor()
 
                 data.xPosition = curX
                 data.yPosition = curY
                 val newPlace = (Forest.places[data.yPosition][data.xPosition] as PlaceWithoutTree)
                 newPlace.animal = data
+                //Forest.colors[data.yPosition][data.xPosition].fill = javafx.scene.paint.Color.BLACK
 //                newPlace.updateColor()
 
                 //updateMaps(data.x, data.y, curX, curY)
@@ -159,13 +228,13 @@ class AnimalData {
 
 
         override fun eat(place: Place): Boolean {
-            if (actionScore == 0){
+            if (actionScore == 0) {
                 return false
             }
             actionScore -= 2
 
             if (place is PlaceWithoutTree && place.animal != null) {
-                if (place.animal!!.isAlive){
+                if (place.animal!!.isAlive) {
                     return false
                 }
                 data.hunger -= place.animal!!.health / 10

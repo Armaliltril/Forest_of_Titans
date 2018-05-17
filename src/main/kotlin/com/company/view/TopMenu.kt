@@ -2,6 +2,7 @@ package com.company.view
 
 import com.company.forest.Forest
 import com.company.forest.InProgress
+import javafx.animation.AnimationTimer
 import tornadofx.*
 
 class TopMenu : View() {
@@ -10,20 +11,26 @@ class TopMenu : View() {
         menubar {
             menu("Controls") {
                 @InProgress item("Start").action {
-//                    println("Pretending Start")
-////                    thread = Thread(Forest.core::run)
-////                    thread.start()
-//                    var lastTime = System.currentTimeMillis()
-//                    while (true) {
-//                        if (System.currentTimeMillis() - lastTime > 1000) {
-//                            val a = find(Updater::class).openModal()
-//                            a!!.close()
-//                            lastTime = System.currentTimeMillis()
-//                        }
-//                    }
+                    Forest.timer?.stop()
+
+                    Forest.timer = object : AnimationTimer() {
+                        private var oldNow: Long = 0
+
+                        override fun handle(now: Long) {
+                            if (oldNow == 0L) {
+                                oldNow = now
+                            }
+                            if ((now - oldNow) > 1000000) {
+                                // Запускаем тик
+                                Forest.core.tick()
+                            }
+                        }
+                    }
+                    Forest.timer!!.start()
                 }
 
                 @InProgress item("Stop").action {
+                    Forest.timer?.stop()
                     println("Pretending Stop")
                 }
             }

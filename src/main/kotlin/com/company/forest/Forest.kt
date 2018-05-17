@@ -3,10 +3,14 @@ package com.company.forest
 import com.company.experimental.Core
 import com.company.experimental.animal.example.StupidAnimal
 import com.company.experimental.tree.example.StupidTree
+import javafx.animation.AnimationTimer
+import javafx.scene.shape.Rectangle
 import tornadofx.*
 import kotlin.concurrent.thread
 
 object Forest {
+    var timer : AnimationTimer? = null
+
     enum class Weather {
         SUNNY, CLOUDY, RAINY
     }
@@ -18,6 +22,8 @@ object Forest {
     var currentSeason: Season
     var currentDay: Int
     val places: ArrayList<ArrayList<Place>>
+    val colors: ArrayList<ArrayList<Rectangle>> = ArrayList()
+
     var core: Core
 
     //In runtime can be changed with real world time
@@ -48,9 +54,9 @@ object Forest {
         currentSeason = Season.SUMMER
         places = core.places
 
-        runAsync {
-            core.run()
-        }
+//        runAsync {
+//            core.run()
+//        }
 
     }
 
