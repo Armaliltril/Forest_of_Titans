@@ -19,8 +19,11 @@ class Statistics: View() {
                 item("Example Tree").action { fire(TreeNumberBox(Observer.countTrees<ExampleTree>())) }
             }
         }
-        text {
-            subscribe<AnimalNumberBox> { text = it.number.toString() }
+        hbox {
+            text("Output: ")
+            text {
+                subscribe<AnimalNumberBox> { text = it.number.toString() }
+            }
         }
     }
 }
