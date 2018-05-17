@@ -6,7 +6,6 @@ import io.kotlintest.shouldBe
 import io.kotlintest.forAll
 import io.kotlintest.matchers.beEmpty
 import io.kotlintest.shouldNot
-import io.kotlintest.shouldNotBe
 
 class RandomTest: FunSpec( {
     test("Chances should be veritable") {
