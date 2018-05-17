@@ -16,4 +16,4 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(MainView::class)
+class TestApp: App(TestView::class)

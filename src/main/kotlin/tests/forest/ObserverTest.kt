@@ -5,8 +5,8 @@ import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree
 import com.company.forest.organisms.animals.ExampleCarnivorous
 import com.company.forest.organisms.trees.ExampleTree
-import io.kotlintest.specs.FunSpec
 import com.company.forest.util.Observer
+import io.kotlintest.specs.FunSpec
 import io.kotlintest.shouldBe
 import io.kotlintest.forAll
 import io.kotlintest.matchers.beEmpty

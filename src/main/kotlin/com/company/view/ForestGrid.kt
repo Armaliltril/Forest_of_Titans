@@ -7,8 +7,6 @@ import com.company.view.signals.TreeBox
 import javafx.scene.paint.Color
 import tornadofx.*
 
-//TODO FIX: Деревья съежают вправо из-за животных
-
 class ForestGrid(): View() {
     val forestModel = ForestModel()
     val places = forestModel.places
