@@ -38,6 +38,11 @@ class TreeData {
     class Builder {
         private val treeData: TreeData = TreeData()
 
+        fun setName(param: String): Builder {
+            treeData.name = param
+            return this
+        }
+
         fun setFoodFrequency(param: Int): Builder {
             treeData.foodFrequency = param
             return this

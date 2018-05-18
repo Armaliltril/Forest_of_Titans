@@ -44,10 +44,8 @@ enum class AnimalType {
                         .build()
     };
 
-    private val rnd = Random()
-
     protected fun createName(animal: Animal) =
-            animal.getType().toString() + ":" + rnd.nextInt()
+            animal.getType().toString() + ":" + Random().nextInt()
 
     abstract fun createData(animal: Animal, xCoord : Int = 0, yCoord: Int = 0): AnimalData
 }
