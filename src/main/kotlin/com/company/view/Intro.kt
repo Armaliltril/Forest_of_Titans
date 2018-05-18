@@ -8,7 +8,7 @@ class Intro: View() {
         label ("Hello and welcome to The Forest")
         button ("Continue"){
             action {
-                replaceWith(find(ForestSetter::class))
+                replaceWith(find(MainView::class))
             }
         }
     }

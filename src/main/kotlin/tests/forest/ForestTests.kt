@@ -15,7 +15,6 @@ import io.kotlintest.shouldNot
 
 class ForestTests: FunSpec( {
     test("Animals should spawn") {
-
         var counter = 0
         Forest.places.forEach { it.forEach { if (it is PlaceWithoutTree && it.animal != null) counter++ } }
         counter shouldBe gte(1)

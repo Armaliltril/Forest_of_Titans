@@ -13,11 +13,10 @@ class Statistics: View() {
     override val root = vbox {
         menubar {
             menu("Count animals") {
-                item("Example Carnivorous").action { fire(AnimalNumberBox(Observer.countAnimals<AnimalData>())) }
-                item("Example Herbivorous").action { fire(AnimalNumberBox(Observer.countAnimals<AnimalData>())) }
+                item("Animals").action { fire(AnimalNumberBox(Observer.countAnimals<AnimalData>())) }
             }
             menu("Count trees") {
-                item("Example Tree").action { fire(TreeNumberBox(Observer.countTrees<TreeData>())) }
+                item("Trees").action { fire(TreeNumberBox(Observer.countTrees<TreeData>())) }
             }
         }
         hbox {

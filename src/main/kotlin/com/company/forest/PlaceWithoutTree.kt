@@ -10,9 +10,9 @@ class PlaceWithoutTree(var animal: AnimalData?): Place() {
 
     override var color = Color.WHITE
 
-    private fun updateColor() {
+     fun updateColor() {
         when(animal) {
-            null -> color = Color.LIGHTGRAY
+            null -> color = Color.WHITE
             else -> color = animal!!.behavior.getColor()
         }
     }

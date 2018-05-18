@@ -84,6 +84,7 @@ class Core {
         worldTime += 1
         treeTurn()
         animalTurn()
+        places.forEach { it.forEach { if (it is PlaceWithoutTree) it.updateColor()} }
     }
 
     private fun createPlaces() {

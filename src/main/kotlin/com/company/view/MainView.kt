@@ -20,17 +20,6 @@ import tornadofx.*
             add(treeView)
             add(animalView)
         }
-        button("REFRESH") {
-            action {
-                find(Fuu::class).openModal()
-            }
-        }
-    }
-
-    class Fuu: Fragment() {
-        override val root = hbox {
-            label("FUUUUUU")
-        }
     }
 }
 

@@ -2,7 +2,9 @@ package com.company.view
 
 import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree
+import com.company.forest.util.makeArrayList
 import com.company.view.signals.AnimalBox
+import com.company.view.signals.ColorsBox
 import com.company.view.signals.TreeBox
 import javafx.scene.paint.Color
 import tornadofx.*
@@ -10,42 +12,51 @@ import tornadofx.*
 class ForestGrid(): View() {
     val forestModel = ForestModel()
     val places = forestModel.places
+    var colors: ArrayList<ArrayList<Color>>
 
     override val root = gridpane {
         for (i in 0 until places.size) {
             row {
                 for (j in 0 until places.size) {
-                    val stackPane = stackpane()
-                    val rect = rectangle {
-                        height = 10.0
-                        width = 10.0
-                    }
+                    if (places[i][j] is PlaceWithTree) {
+                        rectangle {
+                            height = 10.0
+                            width = 10.0
 
-                    if (places[i][j] is PlaceWithoutTree) {
-                        val temp = places[i][j] as PlaceWithoutTree
-                        rect.fill = Color.WHITE
-                        if (temp.animal != null) {
-                            stackPane.add(rect)
-                            stackPane.add(circle {
-                                radius = 2.5
-                                fill = temp.color
+                            onDoubleClick {
+                                val temp = places[i][j] as PlaceWithTree
+                                fire(TreeBox(temp.tree))
+                            }
+                            subscribe<ColorsBox> { fill = it.colors[i][j] }
+                        }
+                    }
+                    else if (places[i][j] is PlaceWithoutTree) {
+                        stackpane {
+                            rectangle {
+                                height = 10.0
+                                width = 10.0
+                                fill = Color.WHITE
+                            }
+                            circle {
+                                radius = 5.0
 
-                                onDoubleClick { fire(AnimalBox(temp.animal!!)) }
-                            })
+                                onDoubleClick {
+                                    val temp = places[i][j] as PlaceWithoutTree
+                                    if (temp.animal != null)
+                                        fire(AnimalBox(temp.animal!!))
+                                }
+                                subscribe<ColorsBox> { fill = it.colors[i][j] }
+                            }
                         }
-                        else stackPane.add(rect)
                     }
-                    else {
-                        val temp = places[i][j] as PlaceWithTree
-                        rect.apply {
-                            fill = temp.color
-                            onDoubleClick { fire(TreeBox(temp.tree)) }
-                        }
-                        stackPane.add(rect)
-                    }
-                    add(stackPane)
                 }
             }
         }
+    }
+
+    init {
+        colors = arrayListOf()
+        for (i in 0 until places.size)
+            colors.add(makeArrayList(places.size, Color.WHITE))
     }
 }
