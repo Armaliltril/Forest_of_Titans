@@ -20,4 +20,10 @@ interface AnimalBehavior{
     fun reproduce(place: Place) : Boolean
 
     fun askExtraTurn() : Boolean
+
+    fun seeEnemies(): List<Place>
+
+    fun seeFood(): List<Place>
+
+    fun seeFriends(): List<Place>
 }
