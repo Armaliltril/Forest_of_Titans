@@ -16,7 +16,7 @@ class ForestUpdater: View() {
         setMaxSize(0.0, 0.0)
         subscribe<UpdateSignal> {
             when(it.isUpdating) {
-                true -> timer = fixedRateTimer("Forest Update Timer", true, 0, 500, {task.run()})
+                true -> timer = fixedRateTimer("Forest Update Timer", true, 0, 60, {task.run()})
                 false -> if (::timer.isInitialized) timer.cancel()
             }
         }

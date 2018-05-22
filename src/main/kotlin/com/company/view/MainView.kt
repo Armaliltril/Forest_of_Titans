@@ -16,7 +16,7 @@ class MainView: View() {
         add(topMenu)
         add(forestUpdater)
         hbox {
-            add(forestGrid)
+            scrollpane { add(forestGrid) }
             add(treeView)
             add(animalView)
         }
