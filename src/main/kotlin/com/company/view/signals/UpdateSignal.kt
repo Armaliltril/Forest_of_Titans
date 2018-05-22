@@ -2,4 +2,4 @@ package com.company.view.signals
 
 import tornadofx.*
 
-class UpdateSignal: FXEvent()
+class UpdateSignal(val isUpdating: Boolean): FXEvent()

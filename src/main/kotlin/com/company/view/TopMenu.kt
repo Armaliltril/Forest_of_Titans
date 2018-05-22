@@ -13,13 +13,15 @@ class TopMenu : View() {
         menubar {
             menu("Controls") {
                 item("Start").action {
-                    val task = timerTask { fire(UpdateSignal()) }
-                    fixedRateTimer("Timer", true, 0, 500, {task.run()})
+                    fire(UpdateSignal(true))
                 }
 
-                @InProgress item("Stop").action {
-                    println("Pretending Stop")
+                item("Stop").action {
+                    fire(UpdateSignal(false))
                 }
+
+                //TODO Is it even works?
+                tooltip("Controls executions of Forest model")
             }
             menu("Tooltips") {
                 item("Paint Tooltips").action {
