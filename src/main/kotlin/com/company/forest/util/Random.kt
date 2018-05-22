@@ -28,7 +28,11 @@ object Random {
 
         return treeCenterCoordinates
     }
-    @InProgress fun getRandomWeather(currentWeatherDays: Int): Forest.Weather {
+
+    @InProgress fun isWeatherChanging(currentWeatherLasts: Int): Boolean {
+        return true
+    }
+    @InProgress fun getRandomWeather(): Forest.Weather {
         return Forest.Weather.SUNNY
     }
     @InProgress fun getSeason(passedDays: Int): Forest.Season {

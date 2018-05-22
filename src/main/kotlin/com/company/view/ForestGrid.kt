@@ -10,9 +10,9 @@ import javafx.scene.paint.Color
 import tornadofx.*
 
 class ForestGrid(): View() {
-    val forestModel = ForestModel()
-    val places = forestModel.places
-    var colors: ArrayList<ArrayList<Color>>
+    private val forestModel = ForestModel()
+    private val places = forestModel.places
+    private var colors: ArrayList<ArrayList<Color>>
 
     override val root = gridpane {
         for (i in 0 until places.size) {

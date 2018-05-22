@@ -23,6 +23,7 @@ class Statistics: View() {
             text("Output: ")
             text {
                 subscribe<AnimalNumberBox> { text = it.number.toString() }
+                style { fontSize = 40.px }
             }
         }
     }

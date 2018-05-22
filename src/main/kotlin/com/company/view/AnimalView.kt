@@ -17,7 +17,7 @@ class AnimalView : View() {
     override val root = vbox {
         subscribe<AnimalBox> { updateProperties(it.animal) }
 
-        setMinSize(100.0, 150.0)
+        setMinSize(150.0, 150.0)
 
         text {
             bind(name)

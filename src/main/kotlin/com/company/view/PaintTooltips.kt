@@ -17,13 +17,6 @@ class PaintTooltips: View() {
                     fill = StupidAnimal().getColor()
                 }
             }
-            hbox {
-                label("Example Herbivorous: ")
-                circle {
-                    radius = 6.0
-                    fill = StupidAnimal().getColor()
-                }
-            }
         }
         vbox {
             label("Trees:")

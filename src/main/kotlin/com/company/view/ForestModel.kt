@@ -7,7 +7,7 @@ import javafx.scene.paint.Color
 import tornadofx.*
 
 class ForestModel(): ViewModel() {
-    val placesProprety = Forest.places.toProperty()
+    private val placesProprety = Forest.places.toProperty()
     var places by placesProprety
 
     fun update() {
@@ -15,7 +15,7 @@ class ForestModel(): ViewModel() {
         fire(ColorsBox(collectColors()))
     }
 
-    fun collectColors(): ArrayList<ArrayList<Color>> {
+    private fun collectColors(): ArrayList<ArrayList<Color>> {
         val colors = arrayListOf<ArrayList<Color>>()
         for (i in 0 until places.size) {
             val row = arrayListOf<Color>()

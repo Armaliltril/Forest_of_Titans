@@ -8,7 +8,6 @@ import kotlin.concurrent.fixedRateTimer
 import kotlin.concurrent.timerTask
 
 class TopMenu : View() {
-    lateinit var thread: Thread
     override val root = vbox {
         menubar {
             menu("Controls") {

@@ -4,7 +4,7 @@ import com.company.app.Styles
 import com.company.forest.InProgress
 import tornadofx.*
 
-@InProgress class MainView: View() {
+class MainView: View() {
     private val forestUpdater = find(ForestUpdater::class)
     private val forestGrid = find(ForestGrid::class)
     private val topMenu = find(TopMenu::class)
