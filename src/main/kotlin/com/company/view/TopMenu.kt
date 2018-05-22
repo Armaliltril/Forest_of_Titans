@@ -14,13 +14,9 @@ class TopMenu : View() {
                 item("Start").action {
                     fire(UpdateSignal(true))
                 }
-
                 item("Stop").action {
                     fire(UpdateSignal(false))
                 }
-
-                //TODO Is it even works?
-                tooltip("Controls executions of Forest model")
             }
             menu("Tooltips") {
                 item("Paint Tooltips").action {

@@ -11,6 +11,7 @@ import tornadofx.*
 
 class Statistics: View() {
     override val root = vbox {
+        title = "Statistics"
         menubar {
             menu("Count animals") {
                 item("Animals").action { fire(AnimalNumberBox(Observer.countAnimals<AnimalData>())) }
@@ -20,11 +21,9 @@ class Statistics: View() {
             }
         }
         hbox {
-            text("Output: ")
-            text {
-                subscribe<AnimalNumberBox> { text = it.number.toString() }
-                style { fontSize = 40.px }
-            }
+            text("Output: ").addClass("text")
+            text { subscribe<AnimalNumberBox> { text = it.number.toString() } }.addClass("text")
+            //children.style { fontSize = 40.px }
         }
     }
 }

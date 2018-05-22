@@ -7,10 +7,15 @@ import tornadofx.cssclass
 import tornadofx.px
 
 class Styles : Stylesheet() {
+    companion object {
+        val sampleButton by cssclass()
+        val sampleText by cssclass()
+    }
+
     init {
-        label {
-            padding = box(10.px)
-            fontSize = 20.px
+        s(text, label, button, menu) {
+            padding = box(5.px)
+            fontSize = 22.px
             fontWeight = FontWeight.MEDIUM
         }
     }

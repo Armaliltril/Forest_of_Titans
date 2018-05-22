@@ -22,7 +22,6 @@ class AnimalView : View() {
         text {
             bind(name)
             style{fontWeight = FontWeight.BOLD}
-
         }
         text().bind(health)
         text().bind(age)

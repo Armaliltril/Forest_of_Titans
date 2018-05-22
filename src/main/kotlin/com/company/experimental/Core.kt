@@ -38,7 +38,7 @@ class Core {
     lateinit var places: ArrayList<ArrayList<Place>>
         private set
 
-    private constructor() {}
+    private constructor()
 
     fun create() {
         val treeCenterCoordinates = com.company.forest.util.Random.defineTreePlaces(Forest.size)
@@ -143,7 +143,7 @@ class Core {
 
         private val world = Core()
 
-        constructor() {}
+        constructor()
 
         fun addAnimalBehavior(behavior: Animal, ratio: Int = 1): Builder {
             world.animalBehaviorTypes.add(Pair(behavior, ratio))

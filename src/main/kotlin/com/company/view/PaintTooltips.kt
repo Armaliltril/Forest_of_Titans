@@ -8,6 +8,7 @@ import tornadofx.*
 @InProgress
 class PaintTooltips: View() {
     override val root = hbox {
+        title = "Paint tooltips"
         vbox {
             label("Animals:")
             hbox {

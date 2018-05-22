@@ -7,7 +7,7 @@ import org.junit.Test
 import tornadofx.*
 import java.io.File
 
-class MyApp: App(Intro::class, Styles::class) {
+class MyApp: App(MainView::class, Styles::class) {
     override fun start(stage: Stage) {
         super.start(stage)
         //stage.reloadViewsOnFocus()
@@ -16,10 +16,10 @@ class MyApp: App(Intro::class, Styles::class) {
     }
 }
 
-class TestApp: App(TestView::class){
+class TestApp: App(TestView::class, Styles::class){
     override fun start(stage: Stage) {
         super.start(stage)
-        stage.reloadViewsOnFocus()
+        reloadStylesheetsOnFocus()
         stage.isFullScreen = false
     }
 }
