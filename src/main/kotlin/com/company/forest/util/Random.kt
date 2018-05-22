@@ -5,7 +5,7 @@ import com.company.forest.InProgress
 import java.util.Random
 
 object Random {
-    fun happenWithChance(chance: Int): Boolean = Random().nextInt(101) in 1..chance
+    fun happenWithChance(chance: Int): Boolean = random.nextInt(101) in 1..chance
     fun defineTreePlaces(size: Int): ArrayList<Pair<Int, Int>> {
         val mask = Array(size, { Array(size, { false }) })
         val treeCenterCoordinates = arrayListOf<Pair<Int, Int>>()
@@ -29,13 +29,26 @@ object Random {
         return treeCenterCoordinates
     }
 
-    @InProgress fun isWeatherChanging(currentWeatherLasts: Int): Boolean {
-        return true
+    fun isWeatherChanging(currentWeatherLasts: Int): Boolean {
+        return happenWithChance(currentWeatherLasts * 5)
     }
-    @InProgress fun getRandomWeather(): Forest.Weather {
-        return Forest.Weather.SUNNY
+    fun getRandomWeather(): Forest.Weather {
+        return when(random.nextInt(3)) {
+            0 -> Forest.Weather.SUNNY
+            1 -> Forest.Weather.CLOUDY
+            2 -> Forest.Weather.RAINY
+            else -> throw RuntimeException("Not correct random in getRandomWeather")
+        }
     }
-    @InProgress fun getSeason(passedDays: Int): Forest.Season {
-        return Forest.Season.SUMMER
-    }
+    fun getSeason(passedDays: Int): Forest.Season {
+        return when(passedDays) {
+            in 0..90 -> Forest.Season.SUMMER
+            in 91..180 -> Forest.Season.AUTUMN
+            in 181..270 -> Forest.Season.WINTER
+            in 270..365 -> Forest.Season.SPRING
+            else -> throw RuntimeException("Wrong number of days in getSeason")
+        }
+    } //TODO mb make more randomized
+
+    private val random = Random()
 }

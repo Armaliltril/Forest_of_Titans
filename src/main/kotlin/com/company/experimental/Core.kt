@@ -63,7 +63,7 @@ class Core {
             //
             pair.first.associateWith(animalHerald)
             // Start number of animals for this behavior
-            for (с in 0 until (pair.second / commonAnimalRatio * startAnimalNumber).toInt()) {
+            for (c in 0 until (pair.second / commonAnimalRatio * startAnimalNumber).toInt()) {
 //              for (i in it.first - 2..it.first + 2)
                 var i = 0
                 var j = 0
