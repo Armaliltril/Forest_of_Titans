@@ -2,11 +2,7 @@ package com.company.experimental.animal
 
 import com.company.experimental.Directions
 import com.company.experimental.Rotations
-import com.company.forest.Forest
-import com.company.forest.Place
-import com.company.forest.PlaceWithTree
-import com.company.forest.PlaceWithoutTree
-import java.awt.Color
+import com.company.forest.*
 
 class AnimalData {
     lateinit var behavior: Animal
@@ -39,11 +35,11 @@ class AnimalData {
 
     var isAlive = true
         private set
-//
-//    var curEnergy = 10
-//        private set
-//    var maxEnergy = 10
-//        private set
+
+    var curEnergy = 10
+        private set
+    var maxEnergy = 10
+        private set
 
     var direction = Directions.UP
         private set
@@ -118,6 +114,7 @@ class AnimalData {
             if (data.isAlive) {
                 data.age += 1
                 behavior.tick()
+                needsAdditionalTurn = askExtraTurn()
             }
         }
 
@@ -135,7 +132,8 @@ class AnimalData {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
 
-                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                if (place is PlaceWithoutTree && place.animal != null
+                                        && behavior.javaClass != place.animal!!.behavior.javaClass) {
                                     results.add(place)
                                 }
                             }
@@ -147,7 +145,8 @@ class AnimalData {
                         for (j in data.yPosition + 5 downTo data.yPosition) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                if (place is PlaceWithoutTree && place.animal != null &&
+                                        behavior.javaClass != place.animal!!.behavior.javaClass) {
                                     results.add(place)
                                 }
                             }
@@ -159,7 +158,8 @@ class AnimalData {
                         for (j in data.yPosition - 5 until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                if (place is PlaceWithoutTree && place.animal != null &&
+                                        behavior.javaClass != place.animal!!.behavior.javaClass) {
                                     results.add(place)
                                 }
                             }
@@ -171,7 +171,8 @@ class AnimalData {
                         for (j in data.yPosition - 5 until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                if (place is PlaceWithoutTree && place.animal != null && behavior.javaClass != place.animal!!.behavior.javaClass) {
+                                if (place is PlaceWithoutTree && place.animal != null &&
+                                        behavior.javaClass != place.animal!!.behavior.javaClass) {
                                     results.add(place)
                                 }
                             }
@@ -201,18 +202,15 @@ class AnimalData {
             val curY = data.yPosition + direction.first
             val curX = data.xPosition + direction.second
 
-            if (checkBounds(curX, curY) && checkPlace(curX, curY)) {
+            if (checkBounds(curX, curY) && noAnimalsInPlace(curX, curY)) {
                 val place = (Forest.places[data.yPosition][data.xPosition] as PlaceWithoutTree)
                 place.animal = null
-//                Forest.colors[data.yPosition][data.xPosition].fill = javafx.scene.paint.Color.WHITE
-//                place.updateColor()
 
                 data.xPosition = curX
                 data.yPosition = curY
+
                 val newPlace = (Forest.places[data.yPosition][data.xPosition] as PlaceWithoutTree)
                 newPlace.animal = data
-                //Forest.colors[data.yPosition][data.xPosition].fill = javafx.scene.paint.Color.BLACK
-//                newPlace.updateColor()
 
                 //updateMaps(data.x, data.y, curX, curY)
                 return true
@@ -227,6 +225,7 @@ class AnimalData {
         }
 
 
+        @InProgress //Works for carnivorous only
         override fun eat(place: Place): Boolean {
             if (actionScore == 0) {
                 return false
@@ -244,6 +243,7 @@ class AnimalData {
         }
 
 
+        @InProgress //Not Fighting
         override fun fight(place: Place): Boolean {
             if (actionScore == 0) {
                 return false
@@ -264,6 +264,7 @@ class AnimalData {
             return false
         }
 
+        @InProgress //Not reproducing
         override fun reproduce(place: Place): Boolean {
             if (actionScore == 0) {
                 return false
@@ -280,7 +281,7 @@ class AnimalData {
             return checkBounds(x, y, Forest.size, Forest.size)
         }
 
-        private fun checkPlace(x: Int, y: Int): Boolean {
+        private fun noAnimalsInPlace(x: Int, y: Int): Boolean {
             return Forest.places[y][x] !is PlaceWithTree && (Forest.places[y][x] as PlaceWithoutTree).animal == null
         }
 
@@ -304,8 +305,12 @@ class AnimalData {
             return Directions.values()[if (newIndex != -1) newIndex else 3]
         }
 
+        @InProgress
         override fun askExtraTurn(): Boolean {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            if (data.curEnergy < 5)
+                return false
+            data.curEnergy -= 5
+            return true
         }
     }
 }

@@ -1,9 +1,9 @@
 package com.company.forest.organisms
 
-import com.company.forest.IRemovable
+import com.company.forest.Removable
 import com.company.forest.InProgress
 
-@InProgress class Corpse(private val initialMeatAmount: Int): IEatable, IRemovable {
+@InProgress class Corpse(private val initialMeatAmount: Int): IEatable, Removable {
     var currentMeatAmount = initialMeatAmount
     fun decay() {
         currentMeatAmount -= initialMeatAmount / 4

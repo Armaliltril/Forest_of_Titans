@@ -1,6 +1,6 @@
 package com.company.forest
 
-interface IRemovable {
+interface Removable {
     @InProgress fun tryRemove() {
 
     }
