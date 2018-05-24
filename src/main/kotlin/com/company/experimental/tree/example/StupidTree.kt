@@ -5,15 +5,6 @@ import com.company.experimental.tree.TreeType
 import javafx.scene.paint.Color
 
 class StupidTree: BaseTreeBehavior() {
-    override fun tick() {
-        produceFood()
-    }
-
-    override fun getColor(): Color {
-        return Color.YELLOW
-    }
-
-    override fun getType(): TreeType {
-        return TreeType.BASE_TREE
-    }
+    override fun getColor() = Color.YELLOW
+    override fun getType() = TreeType.BASE_TREE
 }

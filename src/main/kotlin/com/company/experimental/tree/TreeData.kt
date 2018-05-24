@@ -81,7 +81,6 @@ class TreeData {
         }
     }
 
-
     class TreeHerald : TreeBehavior {
 
         lateinit var behavior: Tree

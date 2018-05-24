@@ -1,10 +1,10 @@
 package com.company.forest
 
 import com.company.experimental.Core
+import com.company.experimental.animal.example.Badger
 import com.company.experimental.animal.example.SmarterAnimal
 import com.company.experimental.animal.example.StupidAnimal
-import com.company.experimental.tree.example.DumbTree
-import com.company.experimental.tree.example.StupidTree
+import com.company.experimental.tree.example.*
 import com.company.forest.util.Random
 
 object Forest {
@@ -15,7 +15,7 @@ object Forest {
         SUMMER, AUTUMN, WINTER, SPRING
     }
 
-    const val size = 50
+    const val size = 60
     
     var currentWeather: Weather
     private var currentWeatherLasts = 0
@@ -56,8 +56,13 @@ object Forest {
         core = Core.Builder()
                 .addAnimalBehavior(StupidAnimal())
                 .addAnimalBehavior(SmarterAnimal())
-                .addTreeBehavior(StupidTree())
-                .addTreeBehavior(DumbTree())
+                .addAnimalBehavior(Badger())
+                .addTreeBehavior(Hazel())
+                .addTreeBehavior(Birch())
+                .addTreeBehavior(Spruce())
+                .addTreeBehavior(Oak())
+                .addTreeBehavior(Maple())
+                .addTreeBehavior(Pine())
                 .setTreeNumber(10)
                 .setStartAnimalNumber(10)
                 .setLimitAnimalNumber(10000)

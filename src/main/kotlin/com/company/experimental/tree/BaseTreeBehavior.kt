@@ -10,4 +10,8 @@ abstract class BaseTreeBehavior : Tree {
     override fun produceFood() {
         herald.produceFood()
     }
+
+    override fun tick() {
+        produceFood()
+    }
 }
