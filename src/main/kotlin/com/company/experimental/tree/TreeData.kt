@@ -1,8 +1,6 @@
 package com.company.experimental.tree
 
-import com.company.experimental.animal.Animal
-import com.company.experimental.animal.AnimalData
-import java.lang.Integer.min
+import com.company.forest.Forest
 import java.util.*
 
 class TreeData {
@@ -11,29 +9,25 @@ class TreeData {
 
     var name = ""
 
-    var foodFrequency: Int = 10
-        private set
-
-    var maxFood: Int = 0
-        private set
-
     var xPosition: Int = 0
         private set
 
     var yPosition: Int = 0
         private set
 
-    var foodPause: Int = 0
-        private set
-
-    var food: Int = 0
-        private set
-
     var isAlive = true
         private set
 
-    var foodPerTime: Int = 1
+    var foodPause: Int = 0
         private set
+
+    var foodSpawnFrequency: Int = 10
+        private set
+
+    var foodPerTime: Int = 5
+        private set
+
+    val treeFood =  TreeFood(0, 0, 0, 0, 0, 0)
 
     class Builder {
         private val treeData: TreeData = TreeData()
@@ -44,7 +38,7 @@ class TreeData {
         }
 
         fun setFoodFrequency(param: Int): Builder {
-            treeData.foodFrequency = param
+            treeData.foodSpawnFrequency = param
             return this
         }
 
@@ -53,8 +47,17 @@ class TreeData {
             return this
         }
 
-        fun setMaxFood(param: Int): Builder {
-            treeData.maxFood = param
+        fun setMaxFoodAndFood(maxOnCrown: Int, maxOnTrump: Int, maxOnRoots: Int): Builder {
+            treeData.treeFood.maxOnCrown = maxOnCrown
+            treeData.treeFood.maxOnTrump = maxOnTrump
+            treeData.treeFood.maxOnCrown = maxOnRoots
+
+            val random = Random()
+
+            treeData.treeFood.onCrown = maxOnCrown - random.nextInt(maxOnCrown / 2)
+            treeData.treeFood.onTrump = maxOnTrump - random.nextInt(maxOnTrump / 2)
+            treeData.treeFood.onRoots = maxOnRoots - random.nextInt(maxOnRoots / 2)
+
             return this
         }
 
@@ -74,7 +77,6 @@ class TreeData {
         }
 
         fun build(): TreeData {
-            treeData.food = treeData.maxFood / 2
             treeData.foodPause = 0
             return treeData
         }
@@ -82,7 +84,6 @@ class TreeData {
 
 
     class TreeHerald : TreeBehavior {
-        var rnd = Random()
 
         lateinit var behavior: Tree
         lateinit var data: TreeData
@@ -98,13 +99,11 @@ class TreeData {
             }
         }
 
-        fun getInfo(): TreeData {
-            return data
-        }
+        fun getInfo() = data
 
-        override fun produce() {
-            if (data.foodPause == data.foodFrequency){
-                data.food = min(data.maxFood, data.food + data.foodPerTime)
+        override fun produceFood() {
+            if (data.foodPause == data.foodSpawnFrequency){
+                data.treeFood.produce(data.foodPerTime)
                 data.foodPause = 0
             }
             else{

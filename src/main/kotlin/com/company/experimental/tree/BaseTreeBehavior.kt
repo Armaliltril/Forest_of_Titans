@@ -7,7 +7,7 @@ abstract class BaseTreeBehavior : Tree {
         this.herald = herald
     }
 
-    override fun produce() {
-        herald.produce()
+    override fun produceFood() {
+        herald.produceFood()
     }
 }

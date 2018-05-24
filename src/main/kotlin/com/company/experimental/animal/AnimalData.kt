@@ -244,7 +244,6 @@ class AnimalData: Eatable {
             return false
         }
 
-
         @InProgress //Works for carnivorous only
         override fun eat(place: Place): Boolean {
             if (actionScore == 0) {
@@ -261,7 +260,6 @@ class AnimalData: Eatable {
             }
             return false
         }
-
 
         @InProgress //Not Fighting
         override fun fight(place: Place): Boolean {
@@ -325,7 +323,6 @@ class AnimalData: Eatable {
             return Directions.values()[if (newIndex != -1) newIndex else 3]
         }
 
-        @InProgress
         override fun askExtraTurn(): Boolean {
             if (data.curEnergy < 5)
                 return false

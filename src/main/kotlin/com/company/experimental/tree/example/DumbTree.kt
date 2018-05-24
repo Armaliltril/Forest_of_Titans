@@ -6,7 +6,7 @@ import javafx.scene.paint.Color
 
 class DumbTree: BaseTreeBehavior() {
     override fun tick() {
-        produce()
+        produceFood()
     }
 
     override fun getColor() = Color.BROWN

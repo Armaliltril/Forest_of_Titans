@@ -48,7 +48,7 @@ object Random {
             in 270..365 -> Forest.Season.SPRING
             else -> throw RuntimeException("Wrong number of days in getSeason")
         }
-    } //TODO mb make more randomized
+    }
 
     private val random = Random()
 }
