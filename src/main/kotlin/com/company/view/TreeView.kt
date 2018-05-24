@@ -9,7 +9,9 @@ import tornadofx.*
 
 class TreeView: View() {
     private var name =  SimpleStringProperty()
-    private var food = SimpleStringProperty()
+    private var foodOnCrown = SimpleStringProperty()
+    private var foodOnTrunk = SimpleStringProperty()
+    private var foodOnRoots = SimpleStringProperty()
 
     @InProgress override val root = vbox {
         subscribe<TreeBox> { updateProperties(it.tree) }
@@ -20,12 +22,15 @@ class TreeView: View() {
             bind(name)
             style{fontWeight = FontWeight.BOLD}
         }
-        text().bind(food)
-        //TODO Parts of Tree
+        text().bind(foodOnCrown)
+        text().bind(foodOnTrunk)
+        text().bind(foodOnRoots)
     }
 
     private fun updateProperties(tree: TreeData) {
           name.value = tree.name
-          food.value = "Food: " + tree.food.toString() + "/" + tree.maxFood.toString()
+          foodOnCrown.value = "Crown food: " + tree.treeFood.onCrown.toString() + "/" + tree.treeFood.maxOnCrown.toString()
+          foodOnTrunk.value = "Crown food: " + tree.treeFood.onTrunk.toString() + "/" + tree.treeFood.maxOnTrunk.toString()
+          foodOnRoots.value = "Crown food: " + tree.treeFood.onRoots.toString() + "/" + tree.treeFood.maxOnRoots.toString()
     }
 }

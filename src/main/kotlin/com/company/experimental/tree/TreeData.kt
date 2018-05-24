@@ -1,6 +1,5 @@
 package com.company.experimental.tree
 
-import com.company.forest.Forest
 import java.util.*
 
 class TreeData {
@@ -49,13 +48,13 @@ class TreeData {
 
         fun setMaxFoodAndFood(maxOnCrown: Int, maxOnTrump: Int, maxOnRoots: Int): Builder {
             treeData.treeFood.maxOnCrown = maxOnCrown
-            treeData.treeFood.maxOnTrump = maxOnTrump
+            treeData.treeFood.maxOnTrunk = maxOnTrump
             treeData.treeFood.maxOnCrown = maxOnRoots
 
             val random = Random()
 
             treeData.treeFood.onCrown = maxOnCrown - random.nextInt(maxOnCrown / 2)
-            treeData.treeFood.onTrump = maxOnTrump - random.nextInt(maxOnTrump / 2)
+            treeData.treeFood.onTrunk = maxOnTrump - random.nextInt(maxOnTrump / 2)
             treeData.treeFood.onRoots = maxOnRoots - random.nextInt(maxOnRoots / 2)
 
             return this

@@ -9,7 +9,7 @@ enum class TreeType {
                 TreeData.Builder()
                         .setBehavior(tree)
                         .setName(createName(tree))
-                        .setMaxFood(100)
+                        .setMaxFoodAndFood(100, 50, 80)
                         .setFoodFrequency(30)
                         .setFoodPerTime(5)
                         .setXPosition(xCoord)

@@ -3,8 +3,8 @@ package com.company.experimental.tree
 import com.company.forest.Forest
 import java.lang.Integer.min
 
-data class TreeFood(var onCrown: Int, var onTrump: Int, var onRoots: Int,
-                    var maxOnCrown: Int, var maxOnTrump: Int, var maxOnRoots: Int) {
+data class TreeFood(var onCrown: Int, var onTrunk: Int, var onRoots: Int,
+                    var maxOnCrown: Int, var maxOnTrunk: Int, var maxOnRoots: Int) {
     enum class Level {
         CROWN {
             override fun getSeasonCoef() = when(Forest.currentWeather) {
@@ -55,7 +55,7 @@ data class TreeFood(var onCrown: Int, var onTrump: Int, var onRoots: Int,
 
     fun produce(foodPerTick: Int) {
         onCrown = min(maxOnCrown, onCrown + foodPerTick * Level.CROWN.getSeasonCoef() * Level.CROWN.getWeatherCoef())
-        onTrump = min(maxOnTrump, onTrump + foodPerTick * Level.ROOTS.getSeasonCoef() * Level.TRUMP.getWeatherCoef())
+        onTrunk = min(maxOnTrunk, onTrunk + foodPerTick * Level.ROOTS.getSeasonCoef() * Level.TRUMP.getWeatherCoef())
         onRoots = min(maxOnRoots, onRoots + foodPerTick * Level.ROOTS.getSeasonCoef() * Level.ROOTS.getWeatherCoef())
     }
 }
