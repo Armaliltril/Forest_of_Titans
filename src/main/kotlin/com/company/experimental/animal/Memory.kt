@@ -16,15 +16,11 @@ class Memory{
         this.animalData = animalData
         this.treeData = treeData
 
-        time = 5;
-        if (animalData != null){
-            type = 'a'
-        }
-        else if(treeData != null){
-            type = 't'
-        }
-        else{
-            type = 'e'
+        time = 5
+        when {
+            animalData != null -> type = 'a'
+            treeData != null -> type = 't'
+            else -> type = 'e'
         }
     }
 
@@ -34,7 +30,7 @@ class Memory{
 
     fun updatePlace(place: Place){
         this.place = place
-        time = 5;
+        time = 5
     }
 
     fun goTime(){

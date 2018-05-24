@@ -3,7 +3,10 @@ package com.company.forest.util
 import com.company.experimental.animal.AnimalData
 import com.company.forest.Forest
 import com.company.forest.InProgress
+import java.lang.Integer.max
+import java.lang.Math.abs
 import java.util.Random
+import kotlin.math.roundToInt
 
 object Random {
     fun happenWithChance(chance: Int): Boolean = random.nextInt(101) in 1..chance
@@ -51,7 +54,18 @@ object Random {
         }
     }
     fun takeDamage(attacker: AnimalData, defender: AnimalData) {
-        TODO()
+        fun hungerCoef(animal: AnimalData) = animal.hunger.toFloat() / animal.maxHunger
+        fun ageCoef(animal: AnimalData) = abs(animal.maxAge / 2 - animal.age) / (animal.maxAge.toFloat() * 2)
+
+        val attackerTakenDamage = random.nextInt((defender.strength * hungerCoef(defender) * ageCoef(defender)).roundToInt())
+        val defenderTakenDamage = random.nextInt((attacker.strength * hungerCoef(attacker) * ageCoef(attacker)).roundToInt())
+        attacker.health = max(0, attacker.health - attackerTakenDamage)
+        defender.health = max(0, (defender.health - defenderTakenDamage * 4))
+    }
+    fun tryReproduce(firstAnimal: AnimalData, secondAnimal: AnimalData): Boolean {
+        if (firstAnimal.age > firstAnimal.maxAge / 4 && secondAnimal.age > secondAnimal.maxAge / 4)
+            return happenWithChance(10)
+        return false
     }
 
     private val random = Random()

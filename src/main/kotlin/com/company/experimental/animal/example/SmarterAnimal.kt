@@ -7,6 +7,6 @@ import javafx.scene.paint.Color
 
 class SmarterAnimal: CarnivorousBehavior() {
 
-    override fun getColor() = Color.VIOLET
+    override fun getColor() = Color.VIOLET!!
     override fun getType() = AnimalType.WALKING_MEAT
 }

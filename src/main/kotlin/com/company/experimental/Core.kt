@@ -78,7 +78,7 @@ class Core private constructor() {
         worldTime += 1
         treeTurn()
         animalTurn()
-        places.forEach { it.forEach { if (it is PlaceWithoutTree) it.updateColor()} }
+        places.forEach { it.forEach { (it as? PlaceWithoutTree)?.updateColor() } }
     }
 
     private fun createPlaces() {

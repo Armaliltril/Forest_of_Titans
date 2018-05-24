@@ -16,7 +16,7 @@ class StupidAnimal: BaseAnimalBehavior() {
         }
     }
 
-    override fun getColor() = Color.RED
+    override fun getColor() = Color.RED!!
 
     override fun getType() = AnimalType.WALKING_MEAT
 }

@@ -8,8 +8,6 @@ import tornadofx.px
 
 class Styles : Stylesheet() {
     companion object {
-        val sampleButton by cssclass()
-        val sampleText by cssclass()
     }
 
     init {

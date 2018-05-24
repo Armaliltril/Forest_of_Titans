@@ -31,14 +31,14 @@ class AnimalData : Eatable {
         private set
 
     var health: Int = 0
-        private set
+
     var age: Int = 0
         private set
     var hunger: Int = 0
         private set
     var foodHealing: Int = 0
         private set
-    var strenth: Int = 0
+    var strength: Int = 0
         private set
     var energy = 10
         private set
@@ -62,8 +62,8 @@ class AnimalData : Eatable {
             return this
         }
 
-        fun setStrenth(param: Int): Builder {
-            animalData.strenth = param
+        fun setStrength(param: Int): Builder {
+            animalData.strength = param
             return this
         }
 
@@ -121,7 +121,7 @@ class AnimalData : Eatable {
     class AnimalHerald : AnimalBehavior {
 
         var turnNumber: Int = 0
-        var actionScore: Int = 0
+        private var actionScore: Int = 0
         var needsAdditionalTurn: Boolean = false
 
         lateinit var behavior: Animal
@@ -152,7 +152,7 @@ class AnimalData : Eatable {
                         for (j in data.yPosition until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                checkPlace(place)
+                                checkIfPlaceChanged(place)
                             }
                         }
                     }
@@ -162,7 +162,7 @@ class AnimalData : Eatable {
                         for (j in data.yPosition + 5 downTo data.yPosition) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                checkPlace(place)
+                                checkIfPlaceChanged(place)
                             }
                         }
                     }
@@ -172,7 +172,7 @@ class AnimalData : Eatable {
                         for (j in data.yPosition - 5 until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                checkPlace(place)
+                                checkIfPlaceChanged(place)
                             }
                         }
                     }
@@ -182,7 +182,7 @@ class AnimalData : Eatable {
                         for (j in data.yPosition - 5 until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                checkPlace(place)
+                                checkIfPlaceChanged(place)
                             }
                         }
                     }
@@ -241,7 +241,7 @@ class AnimalData : Eatable {
                 }
                 fun tryEatOnTrees(): Boolean {
                     val treeFood = placeInMemory.treeData?.treeFood
-                    val isEated = false
+
                     if (treeFood!!.onCrown >= 5 && TreeFood.Level.CROWN.eatableBy.contains(data.behavior.getType())) {
                         actionScore -= 2
                         treeFood.onCrown -= 5
@@ -271,12 +271,12 @@ class AnimalData : Eatable {
             return false
         }
 
-        override fun fight(animal: AnimalData): Boolean {
+        override fun fight(otherAnimal: AnimalData): Boolean {
             if (actionScore < 2)
                 return false
 
             actionScore -= 2
-            Random.takeDamage(this.data, animal)
+            Random.takeDamage(this.data, otherAnimal)
             return true
         }
 
@@ -292,12 +292,26 @@ class AnimalData : Eatable {
             return false
         }
 
-        @InProgress //Not reproducing
-        override fun reproduce(place: Place): Boolean {
+        @InProgress
+        override fun reproduce(otherAnimal: AnimalData): Boolean {
             if (actionScore == 0) {
                 return false
             }
             actionScore -= 2
+            if (Random.tryReproduce(this.data, otherAnimal)) {
+                fun spawnBaby(place: Place) {
+                    TODO()
+                }
+
+                for (i in -1..1) {
+                    for (j in -1..1) {
+                        val currentCoordinates = Pair(data.xPosition + i, data.yPosition + j)
+                        if (noAnimalsInPlace(currentCoordinates.first, currentCoordinates.second)) {
+                            spawnBaby(Forest.places[currentCoordinates.first][currentCoordinates.second])
+                        }
+                    }
+                }
+            }
             return true
         }
 
@@ -317,7 +331,7 @@ class AnimalData : Eatable {
             return true
         }
 
-        private fun checkPlace(place: Place){
+        private fun checkIfPlaceChanged(place: Place){
             if (place is PlaceWithoutTree && place.animal != null)
             {
                 val result = data.memories.find{it.isSame(place.animal)}

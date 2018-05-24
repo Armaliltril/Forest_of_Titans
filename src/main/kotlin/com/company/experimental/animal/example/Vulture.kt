@@ -5,6 +5,6 @@ import com.company.experimental.animal.CarnivorousBehavior
 import javafx.scene.paint.Color
 
 class Vulture: CarnivorousBehavior() {
-    override fun getColor() = Color.RED
+    override fun getColor() = Color.RED!!
     override fun getType() = AnimalType.VULTURE
 }

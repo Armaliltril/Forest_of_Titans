@@ -5,6 +5,6 @@ import com.company.experimental.animal.HerbivorousBehavior
 import javafx.scene.paint.Color
 
 class Chipmunk: HerbivorousBehavior() {
-    override fun getColor() = Color.CRIMSON
+    override fun getColor() = Color.CRIMSON!!
     override fun getType() = AnimalType.CHIPMUNK
 }

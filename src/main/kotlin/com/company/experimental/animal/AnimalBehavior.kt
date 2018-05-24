@@ -13,11 +13,11 @@ interface AnimalBehavior{
 
     fun eat() : Boolean
 
-    fun fight(animal: AnimalData) : Boolean
+    fun fight(otherAnimal: AnimalData) : Boolean
 
     fun regenerate() : Boolean
 
-    fun reproduce(place: Place) : Boolean
+    fun reproduce(otherAnimal: AnimalData) : Boolean
 
     fun askExtraTurn() : Boolean
 

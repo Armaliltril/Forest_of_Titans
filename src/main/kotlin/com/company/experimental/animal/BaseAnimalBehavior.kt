@@ -14,13 +14,13 @@ abstract class BaseAnimalBehavior : Animal {
 
     override fun turnAround(rotation: Rotations) = herald.turnAround(rotation)
 
-    override fun eat(place: Place) = herald.eat(place)
+    override fun eat() = herald.eat()
 
-    override fun fight(place: Place) = herald.fight(place)
+    override fun fight(otherAnimal: AnimalData) = herald.fight(otherAnimal)
 
     override fun regenerate() = herald.regenerate()
 
-    override fun reproduce(place: Place) = herald.reproduce(place)
+    override fun reproduce(otherAnimal: AnimalData) = herald.reproduce(otherAnimal)
 
     override fun askExtraTurn() = herald.askExtraTurn()
 

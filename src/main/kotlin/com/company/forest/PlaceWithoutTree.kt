@@ -8,7 +8,7 @@ import javafx.scene.paint.Color
 
 class PlaceWithoutTree(var animal: AnimalData?): Place() {
 
-    override var color = Color.WHITE
+    override var color = Color.WHITE!!
 
     fun updateColor() {
         color = when(animal) {
