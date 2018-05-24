@@ -5,7 +5,7 @@ import com.company.experimental.Eatable
 import com.company.experimental.Rotations
 import com.company.forest.*
 
-class AnimalData: Eatable {
+class AnimalData : Eatable {
     lateinit var behavior: Animal
         private set
 
@@ -50,6 +50,8 @@ class AnimalData: Eatable {
 
     var direction = Directions.UP
         private set
+
+    var memories: MutableList<Memory> = mutableListOf()
 
     class Builder {
         private val animalData: AnimalData = AnimalData()
@@ -116,6 +118,75 @@ class AnimalData: Eatable {
     }
 
     class AnimalHerald : AnimalBehavior {
+
+        fun checkPlace(place: Place){
+            if (place is PlaceWithoutTree && place.animal != null)
+            {
+                val result = data.memories.find{it.isSame(place.animal)}
+                if (result != null){
+                    result.updatePlace(place)
+                }
+                else{
+                    data.memories.add(Memory(place, place.animal, null))
+                }
+            }
+            else if (place is PlaceWithTree){
+                val result = data.memories.find{it.isSame(place.tree )}
+                if (result != null){
+                    result.updatePlace(place)
+                }
+                else{
+                    data.memories.add(Memory(place, null, place.tree))
+                }
+            }
+        }
+
+        override fun seeFront() {
+            val results = mutableListOf<Place>()
+            when (data.direction) {
+                Directions.UP -> {
+                    for (i in data.xPosition - 5 until data.xPosition + 5) {
+                        for (j in data.yPosition until data.yPosition + 5) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+                                checkPlace(place)
+                            }
+                        }
+                    }
+                }
+                Directions.DOWN -> {
+                    for (i in data.xPosition - 5 until data.xPosition + 5) {
+                        for (j in data.yPosition + 5 downTo data.yPosition) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+                                checkPlace(place)
+                            }
+                        }
+                    }
+                }
+                Directions.LEFT -> {
+                    for (i in data.xPosition - 5 until data.xPosition) {
+                        for (j in data.yPosition - 5 until data.yPosition + 5) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+                                checkPlace(place)
+                            }
+                        }
+                    }
+                }
+                Directions.RIGHT -> {
+                    for (i in data.xPosition until data.xPosition + 5) {
+                        for (j in data.yPosition - 5 until data.yPosition + 5) {
+                            if (checkBounds(j, i)) {
+                                val place = Forest.places[i][j]
+                                checkPlace(place)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         var turnNumber: Int = 0
         var actionScore: Int = 0
 
@@ -130,6 +201,12 @@ class AnimalData: Eatable {
             this.needsAdditionalTurn = false
             this.actionScore = 3
 
+            updateMemory()
+        }
+
+        fun updateMemory(){
+            data.memories.forEach { it.goTime() }
+            data.memories = data.memories.filter { it.time > 0 }.toMutableList()
         }
 
         fun tick() {
@@ -174,7 +251,7 @@ class AnimalData: Eatable {
                     }
                 }
                 Directions.LEFT -> {
-                    for (i in data.xPosition - 5 until  data.xPosition) {
+                    for (i in data.xPosition - 5 until data.xPosition) {
                         for (j in data.yPosition - 5 until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
