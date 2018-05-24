@@ -13,8 +13,10 @@ enum class AnimalType {
                         .setMaxHealth(10)
                         .setFoodHealing(10)
                         .setMaxHunger(1000)
+                        .setMaxEnergy(10)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf(WALKING_MEAT))
                         .build()
     },
 
@@ -27,8 +29,10 @@ enum class AnimalType {
                         .setMaxHealth(10 * 10)
                         .setFoodHealing(4 * 5)
                         .setMaxHunger(5 * 200)
+                        .setMaxEnergy(1 * 5)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf(WOLF))
                         .build()
     },
 
@@ -41,8 +45,10 @@ enum class AnimalType {
                         .setMaxHealth(1 * 10)
                         .setFoodHealing(1 * 5)
                         .setMaxHunger(1 * 200)
+                        .setMaxEnergy(2 * 5)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf(VULTURE, WOLF))
                         .build()
     },
 
@@ -55,8 +61,10 @@ enum class AnimalType {
                         .setMaxHealth(2 * 10)
                         .setFoodHealing(1 * 5)
                         .setMaxHunger(2 * 200)
+                        .setMaxEnergy(2 * 5)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf(VULTURE))
                         .build()
     },
 
@@ -69,8 +77,10 @@ enum class AnimalType {
                         .setMaxHealth(2 * 10)
                         .setFoodHealing(1 * 5)
                         .setMaxHunger(2 * 200)
+                        .setMaxEnergy(3 * 5)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf(WOLF))
                         .build()
     },
 
@@ -83,8 +93,10 @@ enum class AnimalType {
                         .setMaxHealth(2 * 10)
                         .setFoodHealing(1 * 5)
                         .setMaxHunger(3 * 200)
+                        .setMaxEnergy(2 * 5)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf(VULTURE))
                         .build()
     },
 
@@ -97,8 +109,10 @@ enum class AnimalType {
                         .setMaxHealth(15 * 10)
                         .setFoodHealing(20 * 5)
                         .setMaxHunger(10 * 200)
+                        .setMaxEnergy(4 * 5)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf())
                         .build()
     },
 
@@ -111,8 +125,10 @@ enum class AnimalType {
                         .setMaxHealth(8 * 10)
                         .setFoodHealing(8 * 5)
                         .setMaxHunger(8 * 200)
+                        .setMaxEnergy(3 * 5)
                         .setXPosition(xCoord)
                         .setYPosition(yCoord)
+                        .setHunters(arrayListOf())
                         .build()
     };
 
