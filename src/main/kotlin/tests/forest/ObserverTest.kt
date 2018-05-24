@@ -16,11 +16,11 @@ class ObserverTest: FunSpec({
         Forest.places.forEach { it.forEach { if (it is PlaceWithoutTree && it.animal != null) {
             counter++
         }} }
-        Observer.countAnimals<AnimalData>() shouldBe counter
+        Observer.countAllAnimals() shouldBe counter
     }
     test("Observer should count trees right") {
         val fillerTree = TreeData()
         Forest.places.forEach { it.forEach { if (it is PlaceWithTree) it.tree = fillerTree} }
-        Observer.countTrees<TreeData>() shouldBe 1
+        Observer.countAllTrees() shouldBe 1
     }
 })
