@@ -1,5 +1,6 @@
 package com.company.forest.util
 
+import com.company.experimental.animal.AnimalData
 import com.company.forest.Forest
 import com.company.forest.InProgress
 import java.util.Random
@@ -48,6 +49,9 @@ object Random {
             in 270..365 -> Forest.Season.SPRING
             else -> throw RuntimeException("Wrong number of days in getSeason")
         }
+    }
+    fun takeDamage(attacker: AnimalData, defender: AnimalData) {
+        TODO()
     }
 
     private val random = Random()

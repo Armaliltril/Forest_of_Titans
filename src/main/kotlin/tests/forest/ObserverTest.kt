@@ -28,7 +28,6 @@ class ObserverTest: FunSpec({
         Observer.countAllTrees() shouldBe 1
     }
     test("Observer should count animals by type") {
-        var counter = 0
         Forest.places.forEach { it.forEach { if (it is PlaceWithoutTree) it.animal = Badger().createData(0, 0) } }
         Observer.countAnimals(AnimalType.BADGER) shouldBe Observer.countAllAnimals()
     }

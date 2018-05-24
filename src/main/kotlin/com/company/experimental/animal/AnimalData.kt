@@ -3,13 +3,15 @@ package com.company.experimental.animal
 import com.company.experimental.Directions
 import com.company.experimental.Eatable
 import com.company.experimental.Rotations
+import com.company.experimental.tree.TreeFood
 import com.company.forest.*
+import com.company.forest.util.Random
+import java.lang.Integer.max
+import kotlin.math.abs
 
 class AnimalData : Eatable {
     lateinit var behavior: Animal
         private set
-
-    var target: Pair<Place, Char>? = null
 
     var name: String = ""
         private set
@@ -19,6 +21,8 @@ class AnimalData : Eatable {
     var maxAge: Int = 0
         private set
     var maxHunger: Int = 0
+        private set
+    var maxEnergy = 10
         private set
 
     var xPosition: Int = 0
@@ -36,10 +40,7 @@ class AnimalData : Eatable {
         private set
     var strenth: Int = 0
         private set
-
-    var curEnergy = 10
-        private set
-    var maxEnergy = 10
+    var energy = 10
         private set
 
     var isAlive = true
@@ -119,81 +120,20 @@ class AnimalData : Eatable {
 
     class AnimalHerald : AnimalBehavior {
 
-        fun checkPlace(place: Place){
-            if (place is PlaceWithoutTree && place.animal != null)
-            {
-                val result = data.memories.find{it.isSame(place.animal)}
-                if (result != null){
-                    result.updatePlace(place)
-                }
-                else{
-                    data.memories.add(Memory(place, place.animal, null))
-                }
-            }
-            else if (place is PlaceWithTree){
-                val result = data.memories.find{it.isSame(place.tree )}
-                if (result != null){
-                    result.updatePlace(place)
-                }
-                else{
-                    data.memories.add(Memory(place, null, place.tree))
-                }
-            }
-        }
-
-        override fun seeFront() {
-            val results = mutableListOf<Place>()
-            when (data.direction) {
-                Directions.UP -> {
-                    for (i in data.xPosition - 5 until data.xPosition + 5) {
-                        for (j in data.yPosition until data.yPosition + 5) {
-                            if (checkBounds(j, i)) {
-                                val place = Forest.places[i][j]
-                                checkPlace(place)
-                            }
-                        }
-                    }
-                }
-                Directions.DOWN -> {
-                    for (i in data.xPosition - 5 until data.xPosition + 5) {
-                        for (j in data.yPosition + 5 downTo data.yPosition) {
-                            if (checkBounds(j, i)) {
-                                val place = Forest.places[i][j]
-                                checkPlace(place)
-                            }
-                        }
-                    }
-                }
-                Directions.LEFT -> {
-                    for (i in data.xPosition - 5 until data.xPosition) {
-                        for (j in data.yPosition - 5 until data.yPosition + 5) {
-                            if (checkBounds(j, i)) {
-                                val place = Forest.places[i][j]
-                                checkPlace(place)
-                            }
-                        }
-                    }
-                }
-                Directions.RIGHT -> {
-                    for (i in data.xPosition until data.xPosition + 5) {
-                        for (j in data.yPosition - 5 until data.yPosition + 5) {
-                            if (checkBounds(j, i)) {
-                                val place = Forest.places[i][j]
-                                checkPlace(place)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         var turnNumber: Int = 0
         var actionScore: Int = 0
+        var needsAdditionalTurn: Boolean = false
 
         lateinit var behavior: Animal
         lateinit var data: AnimalData
 
-        var needsAdditionalTurn: Boolean = false
+        fun tick() {
+            if (data.isAlive) {
+                data.age += 1
+                behavior.tick()
+                needsAdditionalTurn = askExtraTurn()
+            }
+        }
 
         fun associateWith(behavior: Animal, data: AnimalData) {
             this.behavior = behavior
@@ -204,35 +144,15 @@ class AnimalData : Eatable {
             updateMemory()
         }
 
-        fun updateMemory(){
-            data.memories.forEach { it.goTime() }
-            data.memories = data.memories.filter { it.time > 0 }.toMutableList()
-        }
+        override fun seeFront() {
 
-        fun tick() {
-            if (data.isAlive) {
-                data.age += 1
-                behavior.tick()
-                needsAdditionalTurn = askExtraTurn()
-            }
-        }
-
-        fun getInfo() = data
-
-        override fun seeEnemies(): List<Place> {
-
-            val results = mutableListOf<Place>()
             when (data.direction) {
                 Directions.UP -> {
                     for (i in data.xPosition - 5 until data.xPosition + 5) {
                         for (j in data.yPosition until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-
-                                if (place is PlaceWithoutTree && place.animal != null
-                                        && behavior.javaClass != place.animal!!.behavior.javaClass) {
-                                    results.add(place)
-                                }
+                                checkPlace(place)
                             }
                         }
                     }
@@ -242,10 +162,7 @@ class AnimalData : Eatable {
                         for (j in data.yPosition + 5 downTo data.yPosition) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                if (place is PlaceWithoutTree && place.animal != null &&
-                                        behavior.javaClass != place.animal!!.behavior.javaClass) {
-                                    results.add(place)
-                                }
+                                checkPlace(place)
                             }
                         }
                     }
@@ -255,10 +172,7 @@ class AnimalData : Eatable {
                         for (j in data.yPosition - 5 until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                if (place is PlaceWithoutTree && place.animal != null &&
-                                        behavior.javaClass != place.animal!!.behavior.javaClass) {
-                                    results.add(place)
-                                }
+                                checkPlace(place)
                             }
                         }
                     }
@@ -268,24 +182,12 @@ class AnimalData : Eatable {
                         for (j in data.yPosition - 5 until data.yPosition + 5) {
                             if (checkBounds(j, i)) {
                                 val place = Forest.places[i][j]
-                                if (place is PlaceWithoutTree && place.animal != null &&
-                                        behavior.javaClass != place.animal!!.behavior.javaClass) {
-                                    results.add(place)
-                                }
+                                checkPlace(place)
                             }
                         }
                     }
                 }
             }
-            return results
-        }
-
-        override fun seeFood(): List<Place> {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun seeFriends(): List<Place> {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
         override fun goAhead(): Boolean {
@@ -321,29 +223,60 @@ class AnimalData : Eatable {
             return false
         }
 
-        @InProgress //Works for carnivorous only
-        override fun eat(place: Place): Boolean {
-            if (actionScore == 0) {
+        override fun eat(): Boolean {
+            if (actionScore < 2)
                 return false
-            }
-            actionScore -= 2
 
-            if (place is PlaceWithoutTree && place.animal != null) {
-                if (place.animal!!.isAlive) {
+            for (placeInMemory in data.memories) {
+                if (abs(placeInMemory.place.x - data.xPosition) > 1 && abs(placeInMemory.place.y - data.yPosition) > 1)
+                    continue
+                fun tryEatAnimals(): Boolean {
+                    val animal = placeInMemory.animalData
+                    if (animal?.isAlive!! && animal.eatableBy.contains(data.behavior.getType())) {
+                        actionScore -= 2
+                        data.hunger = max(0, data.hunger - animal.health / 10)
+                        return true
+                    }
                     return false
                 }
-                data.hunger -= place.animal!!.health / 10
-                return true
+                fun tryEatOnTrees(): Boolean {
+                    val treeFood = placeInMemory.treeData?.treeFood
+                    val isEated = false
+                    if (treeFood!!.onCrown >= 5 && TreeFood.Level.CROWN.eatableBy.contains(data.behavior.getType())) {
+                        actionScore -= 2
+                        treeFood.onCrown -= 5
+                        data.hunger = max(0, data.hunger - data.maxHunger / 10)
+                        return true
+                    }
+                    if (treeFood.onTrunk >= 5 && TreeFood.Level.TRUNK.eatableBy.contains(data.behavior.getType())) {
+                        actionScore -= 2
+                        treeFood.onTrunk -= 5
+                        data.hunger = max(0, data.hunger - data.maxHunger / 10)
+                        return true
+                    }
+                    if (treeFood.onRoots >= 5 && TreeFood.Level.ROOTS.eatableBy.contains(data.behavior.getType())) {
+                        actionScore -= 2
+                        treeFood.onRoots -= 5
+                        data.hunger = max(0, data.hunger - data.maxHunger / 10)
+                        return true
+                    }
+                    return false
+                }
+
+                var isEaten = tryEatAnimals()
+                if (!isEaten)
+                    isEaten  = tryEatOnTrees()
+                return isEaten
             }
             return false
         }
 
-        @InProgress //Not Fighting
-        override fun fight(place: Place): Boolean {
-            if (actionScore == 0) {
+        override fun fight(animal: AnimalData): Boolean {
+            if (actionScore < 2)
                 return false
-            }
+
             actionScore -= 2
+            Random.takeDamage(this.data, animal)
             return true
         }
 
@@ -368,6 +301,49 @@ class AnimalData : Eatable {
             return true
         }
 
+        override fun turnAround(rotation: Rotations): Boolean {
+            if (rotation == Rotations.RIGHT) {
+                data.direction = nextDirection(data.direction)
+            } else {
+                data.direction = previousDirection(data.direction)
+            }
+            return true
+        }
+
+        override fun askExtraTurn(): Boolean {
+            if (data.energy < 5)
+                return false
+            data.energy -= 5
+            return true
+        }
+
+        private fun checkPlace(place: Place){
+            if (place is PlaceWithoutTree && place.animal != null)
+            {
+                val result = data.memories.find{it.isSame(place.animal)}
+                if (result != null){
+                    result.updatePlace(place)
+                }
+                else{
+                    data.memories.add(Memory(place, place.animal, null))
+                }
+            }
+            else if (place is PlaceWithTree){
+                val result = data.memories.find{it.isSame(place.tree )}
+                if (result != null){
+                    result.updatePlace(place)
+                }
+                else{
+                    data.memories.add(Memory(place, null, place.tree))
+                }
+            }
+        }
+
+        private fun updateMemory(){
+            data.memories.forEach { it.goTime() }
+            data.memories = data.memories.filter { it.time > 0 }.toMutableList()
+        }
+
         private fun checkBounds(x: Int, y: Int, borderX: Int, borderY: Int): Boolean {
             return -1 < y && y < borderY && -1 < x && x < borderX
         }
@@ -380,31 +356,15 @@ class AnimalData : Eatable {
             return Forest.places[y][x] !is PlaceWithTree && (Forest.places[y][x] as PlaceWithoutTree).animal == null
         }
 
-        override fun turnAround(rotation: Rotations): Boolean {
-            if (rotation == Rotations.RIGHT) {
-                data.direction = nextDirection(data.direction)
-            } else {
-                data.direction = previousDirection(data.direction)
-            }
-            return true
-        }
-
-        fun nextDirection(direction: Directions): Directions {
+        private fun nextDirection(direction: Directions): Directions {
             val index = Directions.values().indexOf(direction)
             return Directions.values()[(index + 1) % 4]
         }
 
-        fun previousDirection(direction: Directions): Directions {
+        private fun previousDirection(direction: Directions): Directions {
             val index = Directions.values().indexOf(direction)
             val newIndex = (index - 1) % 4
             return Directions.values()[if (newIndex != -1) newIndex else 3]
-        }
-
-        override fun askExtraTurn(): Boolean {
-            if (data.curEnergy < 5)
-                return false
-            data.curEnergy -= 5
-            return true
         }
     }
 }

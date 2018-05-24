@@ -25,7 +25,7 @@ data class TreeFood(var onCrown: Int, var onTrunk: Int, var onRoots: Int,
 
             override val eatableBy = arrayListOf(AnimalType.WOODPECKER, AnimalType.FLYING_SQUIRREL)
         },
-        TRUMP {
+        TRUNK {
             override fun getSeasonCoef() = when(Forest.currentWeather) {
                 Forest.Weather.SUNNY -> 1
                 Forest.Weather.RAINY -> 3
@@ -62,7 +62,7 @@ data class TreeFood(var onCrown: Int, var onTrunk: Int, var onRoots: Int,
 
     fun produce(foodPerTick: Int) {
         onCrown = min(maxOnCrown, onCrown + foodPerTick * Level.CROWN.getSeasonCoef() * Level.CROWN.getWeatherCoef())
-        onTrunk = min(maxOnTrunk, onTrunk + foodPerTick * Level.ROOTS.getSeasonCoef() * Level.TRUMP.getWeatherCoef())
+        onTrunk = min(maxOnTrunk, onTrunk + foodPerTick * Level.ROOTS.getSeasonCoef() * Level.TRUNK.getWeatherCoef())
         onRoots = min(maxOnRoots, onRoots + foodPerTick * Level.ROOTS.getSeasonCoef() * Level.ROOTS.getWeatherCoef())
     }
 }

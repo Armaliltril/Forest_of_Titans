@@ -11,9 +11,9 @@ interface AnimalBehavior{
 
     fun turnAround(rotation: Rotations): Boolean
 
-    fun eat(place: Place) : Boolean
+    fun eat() : Boolean
 
-    fun fight(place: Place) : Boolean
+    fun fight(animal: AnimalData) : Boolean
 
     fun regenerate() : Boolean
 
@@ -21,12 +21,5 @@ interface AnimalBehavior{
 
     fun askExtraTurn() : Boolean
 
-    fun seeEnemies(): List<Place>
-
-    fun seeFood(): List<Place>
-
-    fun seeFriends(): List<Place>
-
-    // обновляет память
     fun seeFront()
 }

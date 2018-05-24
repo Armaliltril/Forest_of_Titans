@@ -4,7 +4,7 @@ import com.company.experimental.tree.TreeData
 import com.company.forest.Place
 
 class Memory{
-    lateinit var place : Place
+    var place : Place
     var type: Char = ' '
     var time: Int = 0
 

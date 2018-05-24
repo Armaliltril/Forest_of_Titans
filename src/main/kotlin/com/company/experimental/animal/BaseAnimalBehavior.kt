@@ -14,8 +14,6 @@ abstract class BaseAnimalBehavior : Animal {
 
     override fun turnAround(rotation: Rotations) = herald.turnAround(rotation)
 
-    override fun seeEnemies() = herald.seeEnemies()
-
     override fun eat(place: Place) = herald.eat(place)
 
     override fun fight(place: Place) = herald.fight(place)
@@ -26,7 +24,5 @@ abstract class BaseAnimalBehavior : Animal {
 
     override fun askExtraTurn() = herald.askExtraTurn()
 
-    override fun seeFood() = herald.seeFood()
-
-    override fun seeFriends() = herald.seeFriends()
+    override fun seeFront() = herald.seeFront()
 }
