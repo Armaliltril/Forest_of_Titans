@@ -49,7 +49,7 @@ class TreeData {
         fun setMaxFoodAndFood(maxOnCrown: Int, maxOnTrump: Int, maxOnRoots: Int): Builder {
             treeData.treeFood.maxOnCrown = maxOnCrown
             treeData.treeFood.maxOnTrunk = maxOnTrump
-            treeData.treeFood.maxOnCrown = maxOnRoots
+            treeData.treeFood.maxOnRoots = maxOnRoots
 
             val random = Random()
 
