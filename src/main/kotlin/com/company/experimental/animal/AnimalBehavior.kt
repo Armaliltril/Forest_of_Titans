@@ -26,4 +26,7 @@ interface AnimalBehavior{
     fun seeFood(): List<Place>
 
     fun seeFriends(): List<Place>
+
+    // обновляет память
+    fun seeFront()
 }
