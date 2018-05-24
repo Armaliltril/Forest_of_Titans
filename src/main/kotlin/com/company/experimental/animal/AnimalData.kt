@@ -44,6 +44,7 @@ class AnimalData: Eatable {
         private set
 
     override var eatableBy: ArrayList<AnimalType> = arrayListOf()
+        private set
 
 
     var direction = Directions.UP
