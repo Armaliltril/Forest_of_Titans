@@ -5,7 +5,9 @@ import com.company.forest.util.Random
 import io.kotlintest.shouldBe
 import io.kotlintest.forAll
 import io.kotlintest.matchers.beEmpty
+import io.kotlintest.matchers.should
 import io.kotlintest.shouldNot
+import io.kotlintest.shouldThrow
 
 class RandomTest: FunSpec( {
     test("Chances should be veritable") {
@@ -19,5 +21,10 @@ class RandomTest: FunSpec( {
     test ("Tree (centers) should be generated") {
         val centers = Random.defineTreePlaces(1000)
         centers.shouldNot(beEmpty())
+    }
+    test ("Season should be within the borders") {
+        shouldThrow<RuntimeException> {
+            Random.getSeason(700)
+        }
     }
 })
