@@ -14,11 +14,11 @@ object Observer {
     inline fun <reified T: AnimalData> countAnimals(): Int {
         var counter = 0
         Forest.places.forEach { it.forEach { if (it is PlaceWithoutTree && it.animal is T) counter++} }
-        return counter;
+        return counter
     }
     inline fun <reified T: TreeData> countTrees(): Int {
         val uniqueTrees = mutableSetOf<TreeData>()
         Forest.places.forEach { it.forEach { if (it is PlaceWithTree && it.tree is T) uniqueTrees.add(it.tree)} }
-        return uniqueTrees.size;
+        return uniqueTrees.size
     }
 }

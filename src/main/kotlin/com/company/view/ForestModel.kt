@@ -2,13 +2,12 @@ package com.company.view
 
 import com.company.forest.Forest
 import com.company.view.signals.ColorsBox
-import com.company.view.signals.UpdateSignal
 import javafx.scene.paint.Color
 import tornadofx.*
 
-class ForestModel(): ViewModel() {
-    private val placesProprety = Forest.places.toProperty()
-    var places by placesProprety
+class ForestModel : ViewModel() {
+    private val placesProperty = Forest.places.toProperty()
+    var places by placesProperty
 
     fun update() {
         Forest.tick()

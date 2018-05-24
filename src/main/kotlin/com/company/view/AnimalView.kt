@@ -9,10 +9,10 @@ import javafx.scene.text.FontWeight
 import tornadofx.*
 
 class AnimalView : View() {
-    var name =  SimpleStringProperty()
-    var health = SimpleStringProperty()
-    var age = SimpleStringProperty()
-    var hunger = SimpleStringProperty()
+    private var name =  SimpleStringProperty()
+    private var health = SimpleStringProperty()
+    private var age = SimpleStringProperty()
+    private var hunger = SimpleStringProperty()
 
     override val root = vbox {
         subscribe<AnimalBox> { updateProperties(it.animal) }

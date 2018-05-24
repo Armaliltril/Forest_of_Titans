@@ -10,7 +10,7 @@ class StupidTree: BaseTreeBehavior() {
     }
 
     override fun getColor(): Color {
-        return Color.YELLOW;
+        return Color.YELLOW
     }
 
     override fun getType(): TreeType {

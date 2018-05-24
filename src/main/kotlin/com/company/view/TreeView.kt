@@ -8,8 +8,8 @@ import javafx.scene.text.FontWeight
 import tornadofx.*
 
 class TreeView: View() {
-    var name =  SimpleStringProperty()
-    var food = SimpleStringProperty()
+    private var name =  SimpleStringProperty()
+    private var food = SimpleStringProperty()
 
     @InProgress override val root = vbox {
         subscribe<TreeBox> { updateProperties(it.tree) }

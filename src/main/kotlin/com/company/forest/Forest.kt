@@ -13,7 +13,7 @@ object Forest {
         SUMMER, AUTUMN, WINTER, SPRING
     }
 
-    val size = 50
+    const val size = 50
     
     var currentWeather: Weather
     private var currentWeatherLasts = 0
@@ -24,7 +24,7 @@ object Forest {
     var currentDay: Int
 
     val places: ArrayList<ArrayList<Place>>
-    var core: Core
+    private var core: Core
 
     private fun changeSeason() {
         currentSeason = Random.getSeason(passedDays)
@@ -59,7 +59,7 @@ object Forest {
                 .setLimitAnimalNumber(10000)
                 .build()
 
-        core.create()
+        core.createOrganisms()
 
         places = core.places
 

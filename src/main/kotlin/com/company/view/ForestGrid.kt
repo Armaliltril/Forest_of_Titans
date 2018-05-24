@@ -9,7 +9,7 @@ import com.company.view.signals.TreeBox
 import javafx.scene.paint.Color
 import tornadofx.*
 
-class ForestGrid(): View() {
+class ForestGrid : View() {
     private val forestModel = ForestModel()
     private val places = forestModel.places
     private var colors: ArrayList<ArrayList<Color>>

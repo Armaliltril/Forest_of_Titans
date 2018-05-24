@@ -12,7 +12,7 @@ import com.company.forest.util.makeArrayList
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Core {
+class Core private constructor() {
     private val rnd = Random()
     private val animalBehaviorTypes: ArrayList<Pair<Animal, Int>> = ArrayList()
     private val treeBehaviorTypes: ArrayList<Pair<Tree, Int>> = ArrayList()
@@ -33,14 +33,10 @@ class Core {
     private val animalHerald = AnimalData.AnimalHerald()
     private val treeHerald = TreeData.TreeHerald()
 
-    // For compatibility -_-
-
     lateinit var places: ArrayList<ArrayList<Place>>
         private set
 
-    private constructor()
-
-    fun create() {
+    fun createOrganisms() {
         val treeCenterCoordinates = com.company.forest.util.Random.defineTreePlaces(Forest.size)
         var counter = 0
 
@@ -60,13 +56,11 @@ class Core {
         }
 
         for (pair in animalBehaviorTypes) {
-            //
             pair.first.associateWith(animalHerald)
             // Start number of animals for this behavior
             for (c in 0 until (pair.second / commonAnimalRatio * startAnimalNumber).toInt()) {
-//              for (i in it.first - 2..it.first + 2)
-                var i = 0
-                var j = 0
+                var i: Int
+                var j: Int
                 do {
                     i = rnd.nextInt(Forest.size)
                     j = rnd.nextInt(Forest.size)
@@ -142,8 +136,6 @@ class Core {
     class Builder {
 
         private val world = Core()
-
-        constructor()
 
         fun addAnimalBehavior(behavior: Animal, ratio: Int = 1): Builder {
             world.animalBehaviorTypes.add(Pair(behavior, ratio))

@@ -19,7 +19,7 @@ class ForestTests: FunSpec( {
         Forest.places.forEach { it.forEach { if (it is PlaceWithoutTree && it.animal != null) counter++ } }
         counter shouldBe gte(1)
     }
-    test("Trees should swawn") {
+    test("Trees should spawn") {
         var counter = 0
         Forest.places.forEach { it.forEach { if (it is PlaceWithTree) counter++} }
         counter shouldBe gte(1)

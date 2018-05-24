@@ -139,7 +139,7 @@ class AnimalData {
                             }
                         }
                     }
-                };
+                }
                 Directions.DOWN -> {
                     for (i in data.xPosition - 5 until data.xPosition + 5) {
                         for (j in data.yPosition + 5 downTo data.yPosition) {
