@@ -34,6 +34,8 @@ class AnimalData: Eatable {
         private set
     var foodHealing: Int = 0
         private set
+    var strenth: Int = 0
+        private set
 
     var curEnergy = 10
         private set
@@ -54,6 +56,11 @@ class AnimalData: Eatable {
 
         fun setName(param: String): Builder {
             animalData.name = param
+            return this
+        }
+
+        fun setStrenth(param: Int): Builder {
+            animalData.strenth = param
             return this
         }
 
@@ -133,9 +140,7 @@ class AnimalData: Eatable {
             }
         }
 
-        fun getInfo(): AnimalData {
-            return data
-        }
+        fun getInfo() = data
 
         override fun seeEnemies(): List<Place> {
 
