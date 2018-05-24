@@ -4,32 +4,6 @@ import java.util.*
 
 enum class AnimalType {
 
-    CARNIVOROUS() {
-        override fun createData(animal: Animal, xCoord: Int, yCoord: Int): AnimalData =
-                AnimalData.Builder()
-                        .setName(createName((animal)))
-                        .setMaxAge(100)
-                        .setMaxHealth(100)
-                        .setMaxHunger(30)
-                        .setFoodHealing(10)
-                        .setXPosition(xCoord)
-                        .setYPosition(yCoord)
-                        .build()
-    },
-
-    HERBIVOROUS {
-        override fun createData(animal: Animal, xCoord: Int, yCoord: Int): AnimalData =
-                AnimalData.Builder()
-                        .setName(createName(animal))
-                        .setMaxAge(20)
-                        .setMaxHealth(200)
-                        .setFoodHealing(10)
-                        .setMaxHunger(10)
-                        .setXPosition(xCoord)
-                        .setYPosition(yCoord)
-                        .build()
-    },
-
     WALKING_MEAT {
         override fun createData(animal: Animal, xCoord: Int, yCoord: Int): AnimalData =
                 AnimalData.Builder()

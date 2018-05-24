@@ -4,16 +4,11 @@ import com.company.experimental.tree.BaseTreeBehavior
 import com.company.experimental.tree.TreeType
 import javafx.scene.paint.Color
 
-class StupidTree: BaseTreeBehavior() {
+class DumbTree: BaseTreeBehavior() {
     override fun tick() {
         produce()
     }
 
-    override fun getColor(): Color {
-        return Color.YELLOW
-    }
-
-    override fun getType(): TreeType {
-        return TreeType.BASE_TREE
-    }
+    override fun getColor() = Color.BROWN
+    override fun getType() = TreeType.BASE_TREE
 }

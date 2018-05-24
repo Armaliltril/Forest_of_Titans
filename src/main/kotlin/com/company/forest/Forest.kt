@@ -1,7 +1,9 @@
 package com.company.forest
 
 import com.company.experimental.Core
+import com.company.experimental.animal.example.SmarterAnimal
 import com.company.experimental.animal.example.StupidAnimal
+import com.company.experimental.tree.example.DumbTree
 import com.company.experimental.tree.example.StupidTree
 import com.company.forest.util.Random
 
@@ -53,7 +55,9 @@ object Forest {
     init {
         core = Core.Builder()
                 .addAnimalBehavior(StupidAnimal())
+                .addAnimalBehavior(SmarterAnimal())
                 .addTreeBehavior(StupidTree())
+                .addTreeBehavior(DumbTree())
                 .setTreeNumber(10)
                 .setStartAnimalNumber(10)
                 .setLimitAnimalNumber(10000)

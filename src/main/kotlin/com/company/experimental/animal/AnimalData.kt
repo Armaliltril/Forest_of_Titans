@@ -1,16 +1,18 @@
 package com.company.experimental.animal
 
 import com.company.experimental.Directions
+import com.company.experimental.Eatable
 import com.company.experimental.Rotations
 import com.company.forest.*
 
-class AnimalData {
+class AnimalData: Eatable {
     lateinit var behavior: Animal
         private set
 
     var target: Pair<Place, Char>? = null
 
     var name: String = ""
+        private set
 
     var maxHealth: Int = 0
         private set
@@ -33,13 +35,16 @@ class AnimalData {
     var foodHealing: Int = 0
         private set
 
-    var isAlive = true
-        private set
-
     var curEnergy = 10
         private set
     var maxEnergy = 10
         private set
+
+    var isAlive = true
+        private set
+
+    override var eatableBy: ArrayList<AnimalType> = arrayListOf()
+
 
     var direction = Directions.UP
         private set
@@ -67,6 +72,11 @@ class AnimalData {
             return this
         }
 
+        fun setMaxEnergy(param: Int): Builder {
+            animalData.maxEnergy = param
+            return this
+        }
+
         fun setYPosition(param: Int): Builder {
             animalData.yPosition = param
             return this
@@ -84,6 +94,11 @@ class AnimalData {
 
         fun setBehavior(animal: Animal): Builder {
             animalData.behavior = animal
+            return this
+        }
+
+        fun setHunters(hunterList: ArrayList<AnimalType>): Builder {
+            animalData.eatableBy = hunterList
             return this
         }
 

@@ -4,11 +4,11 @@ import java.util.*
 
 enum class TreeType {
 
-    TREE() {
+    BASE_TREE() {
         override fun createData(tree: Tree, xCoord: Int, yCoord: Int): TreeData =
                 TreeData.Builder()
-                        .setName(createName(tree))
                         .setBehavior(tree)
+                        .setName(createName(tree))
                         .setMaxFood(10)
                         .setFoodFrequency(30)
                         .setFoodPerTime(5)
