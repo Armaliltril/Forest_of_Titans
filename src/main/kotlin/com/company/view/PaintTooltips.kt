@@ -1,7 +1,7 @@
 package com.company.view
 
-import com.company.experimental.animal.example.*
-import com.company.experimental.tree.example.*
+import com.company.forest.organisms.animal.types.*
+import com.company.forest.organisms.tree.types.*
 import com.company.forest.InProgress
 import javafx.scene.text.FontWeight
 import tornadofx.*

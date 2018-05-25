@@ -1,8 +1,7 @@
 package com.company.forest.util
 
-import com.company.experimental.animal.AnimalData
+import com.company.forest.organisms.animal.AnimalData
 import com.company.forest.Forest
-import com.company.forest.InProgress
 import java.lang.Integer.max
 import java.lang.Math.abs
 import java.util.Random

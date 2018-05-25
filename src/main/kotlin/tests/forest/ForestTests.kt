@@ -1,17 +1,11 @@
 package tests.forest
 
-import com.company.experimental.Core
 import com.company.forest.Forest
 import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree
 import io.kotlintest.specs.FunSpec
 import io.kotlintest.shouldBe
-import io.kotlintest.forAll
-import io.kotlintest.matchers.beEmpty
-import io.kotlintest.matchers.gt
 import io.kotlintest.matchers.gte
-import io.kotlintest.matchers.should
-import io.kotlintest.shouldNot
 
 class ForestTests: FunSpec( {
     test("Animals should spawn") {

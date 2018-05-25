@@ -1,12 +1,10 @@
 package tests.forest
 
-import com.company.experimental.animal.AnimalData
-import com.company.experimental.animal.AnimalType
-import com.company.experimental.animal.example.Badger
-import com.company.experimental.animal.example.StupidAnimal
-import com.company.experimental.tree.TreeData
-import com.company.experimental.tree.TreeType
-import com.company.experimental.tree.example.Birch
+import com.company.forest.organisms.animal.AnimalType
+import com.company.forest.organisms.animal.types.Badger
+import com.company.forest.organisms.tree.TreeData
+import com.company.forest.organisms.tree.TreeType
+import com.company.forest.organisms.tree.types.Birch
 import com.company.forest.Forest
 import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree

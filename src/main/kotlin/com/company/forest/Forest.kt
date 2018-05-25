@@ -1,10 +1,10 @@
 package com.company.forest
 
-import com.company.experimental.Core
-import com.company.experimental.animal.example.Badger
-import com.company.experimental.animal.example.SmarterAnimal
-import com.company.experimental.animal.example.StupidAnimal
-import com.company.experimental.tree.example.*
+import com.company.forest.organisms.Core
+import com.company.forest.organisms.animal.types.Badger
+import com.company.forest.organisms.animal.types.SmarterAnimal
+import com.company.forest.organisms.animal.types.StupidAnimal
+import com.company.forest.organisms.tree.types.*
 import com.company.forest.util.Random
 
 object Forest {

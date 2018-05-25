@@ -1,7 +1,7 @@
 package com.company.view
 
-import com.company.experimental.animal.AnimalType
-import com.company.experimental.tree.TreeType
+import com.company.forest.organisms.animal.AnimalType
+import com.company.forest.organisms.tree.TreeType
 import com.company.forest.util.Observer
 import com.company.view.signals.AnimalNumberBox
 import com.company.view.signals.TreeNumberBox

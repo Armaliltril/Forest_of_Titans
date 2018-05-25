@@ -1,13 +1,9 @@
 package com.company.forest.util
 
-import com.company.experimental.animal.Animal
-import com.company.experimental.animal.AnimalData
-import com.company.experimental.animal.AnimalType
-import com.company.experimental.tree.Tree
-import com.company.experimental.tree.TreeData
-import com.company.experimental.tree.TreeType
+import com.company.forest.organisms.animal.AnimalType
+import com.company.forest.organisms.tree.TreeData
+import com.company.forest.organisms.tree.TreeType
 import com.company.forest.Forest
-import com.company.forest.InProgress
 import com.company.forest.PlaceWithTree
 import com.company.forest.PlaceWithoutTree
 

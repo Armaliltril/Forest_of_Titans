@@ -1,8 +1,6 @@
 package com.company.view
 
-import com.company.experimental.animal.Animal
-import com.company.experimental.animal.AnimalData
-import com.company.forest.InProgress
+import com.company.forest.organisms.animal.AnimalData
 import com.company.view.signals.AnimalBox
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.text.FontWeight

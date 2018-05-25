@@ -1,6 +1,6 @@
 package com.company.view
 
-import com.company.experimental.tree.TreeData
+import com.company.forest.organisms.tree.TreeData
 import com.company.forest.InProgress
 import com.company.view.signals.TreeBox
 import javafx.beans.property.SimpleStringProperty
