@@ -19,4 +19,8 @@ interface AnimalBehavior{
     fun askExtraTurn() : Boolean
 
     fun seeFront()
+
+    fun isHungry(percent: Int): Boolean
+    fun isDamaged(percent: Int): Boolean
+    fun isTired(percent: Int): Boolean
 }

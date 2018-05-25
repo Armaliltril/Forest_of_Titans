@@ -331,6 +331,10 @@ class AnimalData : Eatable {
             return true
         }
 
+        override fun isDamaged(percent: Int) = data.health < data.maxHealth * percent / 100.0
+        override fun isHungry(percent: Int) = data.hunger < data.maxHunger * percent / 100.0
+        override fun isTired(percent: Int) = data.energy < data.maxEnergy * percent / 100.0
+
         private fun checkIfPlaceChanged(place: Place){
             if (place is PlaceWithoutTree && place.animal != null)
             {

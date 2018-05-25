@@ -19,11 +19,11 @@ class Core private constructor() {
 
     var worldTime = 0
 
-    private var commonTreeRatio = 0.0
+    private var commonTreeRatio = 2.0
     private var startTreeNumber = 30
 
     private var startAnimalNumber = 30
-    private var commonAnimalRatio = 0.0
+    private var commonAnimalRatio = 2.0
     private var currentAnimalNumber = 0
     private var limitAnimalNumber = 100
 

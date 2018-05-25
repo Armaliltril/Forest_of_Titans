@@ -10,7 +10,6 @@ abstract class BaseAnimalBehavior : Animal {
     }
 
     override fun goAhead() = herald.goAhead()
-
     override fun turnAround(rotation: Rotations) = herald.turnAround(rotation)
 
     override fun eat() = herald.eat()
@@ -24,4 +23,8 @@ abstract class BaseAnimalBehavior : Animal {
     override fun askExtraTurn() = herald.askExtraTurn()
 
     override fun seeFront() = herald.seeFront()
+
+    override fun isDamaged(percent: Int) = herald.isDamaged(percent)
+    override fun isHungry(percent: Int) = herald.isHungry(percent)
+    override fun isTired(percent: Int) = herald.isTired(percent)
 }

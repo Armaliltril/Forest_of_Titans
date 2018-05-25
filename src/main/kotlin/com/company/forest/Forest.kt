@@ -1,9 +1,7 @@
 package com.company.forest
 
 import com.company.forest.organisms.Core
-import com.company.forest.organisms.animal.types.Badger
-import com.company.forest.organisms.animal.types.SmarterAnimal
-import com.company.forest.organisms.animal.types.StupidAnimal
+import com.company.forest.organisms.animal.types.*
 import com.company.forest.organisms.tree.types.*
 import com.company.forest.util.Random
 
@@ -55,16 +53,21 @@ object Forest {
     init {
         core = Core.Builder()
                 .addAnimalBehavior(StupidAnimal())
-                .addAnimalBehavior(SmarterAnimal())
                 .addAnimalBehavior(Badger())
+                .addAnimalBehavior(Chipmunk())
+                .addAnimalBehavior(FlyingSquirrel())
+                .addAnimalBehavior(Squirrel())
+                .addAnimalBehavior(Vulture())
+                .addAnimalBehavior(Wolf())
+                .addAnimalBehavior(Woodpecker())
                 .addTreeBehavior(Hazel())
                 .addTreeBehavior(Birch())
                 .addTreeBehavior(Spruce())
                 .addTreeBehavior(Oak())
                 .addTreeBehavior(Maple())
                 .addTreeBehavior(Pine())
-                .setTreeNumber(10)
-                .setStartAnimalNumber(10)
+                .setTreeNumber(30)
+                .setStartAnimalNumber(30)
                 .setLimitAnimalNumber(10000)
                 .build()
 
