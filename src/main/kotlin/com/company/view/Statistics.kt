@@ -37,7 +37,7 @@ class Statistics: View() {
                 text { subscribe<AnimalNumberBox> { text = it.number.toString() } }.addClass("text")
             }
             hbox {
-                text("Number of chosen trees").addClass("text")
+                text("Number of chosen trees: ").addClass("text")
                 text { subscribe<TreeNumberBox> { text = it.number.toString() } }.addClass("text")
             }
         }

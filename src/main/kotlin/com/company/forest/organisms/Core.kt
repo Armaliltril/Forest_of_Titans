@@ -13,7 +13,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Core private constructor() {
-    private val rnd = Random()
+    private val random = Random()
     private val animalBehaviorTypes: ArrayList<Pair<Animal, Int>> = ArrayList()
     private val treeBehaviorTypes: ArrayList<Pair<Tree, Int>> = ArrayList()
 
@@ -62,8 +62,8 @@ class Core private constructor() {
                 var i: Int
                 var j: Int
                 do {
-                    i = rnd.nextInt(Forest.size)
-                    j = rnd.nextInt(Forest.size)
+                    i = random.nextInt(Forest.size)
+                    j = random.nextInt(Forest.size)
                 } while (places[i][j] is PlaceWithTree)
 
                 val animalData = pair.first.createData(j, i)
@@ -94,7 +94,7 @@ class Core private constructor() {
     }
 
     private fun treeTurn() {
-        val firstOrder = (0 until trees.size).sortedBy { rnd.nextDouble() }
+        val firstOrder = (0 until trees.size).sortedBy { random.nextDouble() }
         for (i in firstOrder) {
             treeHerald.associateWith(trees[i].first, trees[i].second)
             treeHerald.tick()
@@ -102,7 +102,8 @@ class Core private constructor() {
     }
 
     private fun animalTurn() {
-        val firstOrder = (0 until currentAnimalNumber).sortedBy { rnd.nextDouble() }
+        val firstOrder = (0 until currentAnimalNumber).toMutableList()
+        firstOrder.shuffle()
         val secondOrder = firstWave(animals, firstOrder)
         secondWave(animals, secondOrder)
         animals = reborn(animals)

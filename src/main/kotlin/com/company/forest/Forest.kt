@@ -67,7 +67,7 @@ object Forest {
                 .addTreeBehavior(Maple())
                 .addTreeBehavior(Pine())
                 .setTreeNumber(30)
-                .setStartAnimalNumber(30)
+                .setStartAnimalNumber(80)
                 .setLimitAnimalNumber(10000)
                 .build()
 
