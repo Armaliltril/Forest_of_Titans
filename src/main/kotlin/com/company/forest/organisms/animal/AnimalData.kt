@@ -7,6 +7,7 @@ import com.company.forest.organisms.tree.TreeFood
 import com.company.forest.*
 import com.company.forest.util.Random
 import java.lang.Integer.max
+import java.lang.Integer.min
 import kotlin.math.abs
 
 class AnimalData : Eatable {
@@ -191,10 +192,10 @@ class AnimalData : Eatable {
         }
 
         override fun goAhead(): Boolean {
-            if (actionScore == 0) {
+            if (actionScore < 1) {
                 return false
             }
-            actionScore -= 2
+            actionScore -= 1
 
             val direction = data.direction.value
 
@@ -211,14 +212,7 @@ class AnimalData : Eatable {
                 val newPlace = (Forest.places[data.yPosition][data.xPosition] as PlaceWithoutTree)
                 newPlace.animal = data
 
-                //updateMaps(data.x, data.y, curX, curY)
                 return true
-//                if (checkBounds(data.visionX + direction.first, data.visionY + direction.second, 30, 30)) {
-//                    data.visionX += direction.first
-//                    data.visionY += direction.second
-//                } else {
-//
-//                }
             }
             return false
         }
@@ -232,7 +226,7 @@ class AnimalData : Eatable {
                     continue
                 fun tryEatAnimals(): Boolean {
                     val animal = placeInMemory.animalData
-                    if (animal?.isAlive!! && animal.eatableBy.contains(data.behavior.getType())) {
+                    if (animal != null && animal.isAlive && animal.eatableBy.contains(data.behavior.getType())) {
                         actionScore -= 2
                         data.hunger = max(0, data.hunger - animal.health / 10)
                         return true
@@ -240,25 +234,27 @@ class AnimalData : Eatable {
                     return false
                 }
                 fun tryEatOnTrees(): Boolean {
-                    val treeFood = placeInMemory.treeData?.treeFood
+                    if (placeInMemory.treeData != null) {
+                        val treeFood = placeInMemory.treeData!!.treeFood
 
-                    if (treeFood!!.onCrown >= 5 && TreeFood.Level.CROWN.eatableBy.contains(data.behavior.getType())) {
-                        actionScore -= 2
-                        treeFood.onCrown -= 5
-                        data.hunger = max(0, data.hunger - data.maxHunger / 10)
-                        return true
-                    }
-                    if (treeFood.onTrunk >= 5 && TreeFood.Level.TRUNK.eatableBy.contains(data.behavior.getType())) {
-                        actionScore -= 2
-                        treeFood.onTrunk -= 5
-                        data.hunger = max(0, data.hunger - data.maxHunger / 10)
-                        return true
-                    }
-                    if (treeFood.onRoots >= 5 && TreeFood.Level.ROOTS.eatableBy.contains(data.behavior.getType())) {
-                        actionScore -= 2
-                        treeFood.onRoots -= 5
-                        data.hunger = max(0, data.hunger - data.maxHunger / 10)
-                        return true
+                        if (treeFood.onCrown >= 5 && TreeFood.Level.CROWN.eatableBy.contains(data.behavior.getType())) {
+                            actionScore -= 2
+                            treeFood.onCrown -= 5
+                            data.hunger = max(0, data.hunger - data.maxHunger / 10)
+                            return true
+                        }
+                        if (treeFood.onTrunk >= 5 && TreeFood.Level.TRUNK.eatableBy.contains(data.behavior.getType())) {
+                            actionScore -= 2
+                            treeFood.onTrunk -= 5
+                            data.hunger = max(0, data.hunger - data.maxHunger / 10)
+                            return true
+                        }
+                        if (treeFood.onRoots >= 5 && TreeFood.Level.ROOTS.eatableBy.contains(data.behavior.getType())) {
+                            actionScore -= 2
+                            treeFood.onRoots -= 5
+                            data.hunger = max(0, data.hunger - data.maxHunger / 10)
+                            return true
+                        }
                     }
                     return false
                 }
@@ -280,13 +276,14 @@ class AnimalData : Eatable {
             return true
         }
 
-        override fun regenerate(): Boolean {
+        override fun rest(): Boolean {
             if (actionScore == 0) {
                 return false
             }
             actionScore -= 2
             if (data.hunger < 0) {
-                data.health += data.foodHealing
+                data.health = min(data.maxHealth, data.health + data.maxHealth / 10)
+                data.energy = min(data.maxEnergy, data.energy + data.maxEnergy / 2)
                 return true
             }
             return false
@@ -300,7 +297,7 @@ class AnimalData : Eatable {
             actionScore -= 2
             if (Random.tryReproduce(this.data, otherAnimal)) {
                 fun spawnBaby(place: Place) {
-                    TODO()
+
                 }
 
                 for (i in -1..1) {

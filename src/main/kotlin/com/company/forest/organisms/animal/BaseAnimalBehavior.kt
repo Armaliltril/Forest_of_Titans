@@ -16,7 +16,7 @@ abstract class BaseAnimalBehavior : Animal {
 
     override fun fight(otherAnimal: AnimalData) = herald.fight(otherAnimal)
 
-    override fun regenerate() = herald.regenerate()
+    override fun rest() = herald.rest()
 
     override fun reproduce(otherAnimal: AnimalData) = herald.reproduce(otherAnimal)
 
